@@ -402,12 +402,12 @@
                                         <div class="col-7 modal-view-info-content" id="ModalViewInfocreated">{{
                                             formatearFecha(target_user_info.created_at) }}</div>
                                     </div>
-                                    <div v-if="parseRole(target_user_info.roles) == 'Jugador'" class="row">
+                                    <div v-if="parseRole(target_user_info.roles) == 'Jugador' && (skins.register_fields.root == state.id || skins.register_fields.root1 == state.id)" class="row">
                                         <div class="col-5 modal-view-info-data mb-3">Nombre y id:</div>
                                         <div class="col-7 modal-view-info-content" id="ModalViewInfoname">
                                             {{ target_user_info.firstname }}</div>
                                     </div>
-                                    <div v-if="parseRole(target_user_info.roles) == 'Jugador'" class="row">
+                                    <div v-if="parseRole(target_user_info.roles) == 'Jugador' && (skins.register_fields.root == state.id || skins.register_fields.root1 == state.id)" class="row">
                                         <div class="col-12 text-center">
                                             <button type="button" class="btn btn-primary btn-sm" id="viewDocumentButton"
                                                 @click="verDocumento(target_user_info.id)">
