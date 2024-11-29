@@ -537,7 +537,7 @@ export default new Vuex.Store({
         async getChildrenByName(state, payload){
             state.commit("setLoadingCapital",true);
             if(payload !== "") {
-                let result = await axios.post(state.state.apiHost+"/buscar_capital", {
+                let result = await axios.post(state.state.apiHostnew+"buscar_capital", {
                     "username": payload,
                     "login_Id": state.state.main_tree.id,
                     "token": state.state.user.token
