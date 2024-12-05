@@ -236,6 +236,21 @@
                         </div>
                         <div id="collapseOne4" class="collapse px-3 menu-item" aria-labelledby="headingOne4"
                             data-parent="#accordionExample"></div>
+
+                        <!-- solicitudes de Retiros -->
+                        <div v-if="(skins.register_fields.root == state.id || skins.register_fields.root1 == state.id)" class="menu-item" id="headingOne5">
+                            <a style="font-size: small !important;" href="#/dashboard"
+                                class="collapsible-header waves-effect arrow-r" @click="changeView('solicitudRetiro')"
+                                data-toggle="collapse" data-target="#collapseOne5" aria-expanded="false"
+                                aria-controls="collapseOne5">
+                                <i class="fas fa-money-bill mr-3"></i><span
+                                    :style="hideArrows ? 'display:none;' : ''">Solicitudes de Retiros<i
+                                        class="fas fa-angle-right my-0"></i></span>
+                            </a>
+                        </div>
+                        <div id="collapseOne5" class="collapse px-3 menu-item" aria-labelledby="headingOne5"
+                            data-parent="#accordionExample"></div>
+                            
                         <!-- CONDITION FinanceAffiliatesOwnBalance END -->
 
                 <li>
@@ -321,6 +336,7 @@
         <finanzasJugadorOperaciones v-if="getActualView == 'finanzasJugadorOperaciones'" :view_type="viewType" />
         <finanzasJugadorCuentas v-if="getActualView == 'finanzasJugadorCuentas'" :view_type="viewType" />
         <miResumen v-if="getActualView == 'miResumen'" :view_type="viewType" />
+        <solicitudRetiro v-if="getActualView == 'solicitudRetiro'" :view_type="viewType" />
         <div v-if="!reloadStats" style="width: 100vw;height: 100vh;" class="text-center my-5">
             <div class="spinner-border text-light" role="status">
                 <span class="sr-only">Loading...</span>
@@ -413,6 +429,8 @@ import finanzasJugadorOperaciones from './dashboard_components/finanzasJugadorOp
 import finanzasJugadorCuentas from './dashboard_components/finanzasJugadorCuentas'
 import historialIngresos from './historialIngresos.vue'
 import miResumen from './dashboard_components/miResumen'
+import solicitudRetiro from './dashboard_components/SolicitudRetiro'
+
 import router from '../router/index';
 import axios from 'axios';
 export default {
@@ -433,6 +451,7 @@ export default {
         finanzasJugadorOperaciones,
         finanzasJugadorCuentas,
         miResumen,
+        solicitudRetiro,
         historialIngresos
     },
     data() {
@@ -736,6 +755,9 @@ export default {
         },
     },
     computed: {
+        state() {
+            return this.$store.state.user;
+        },
         apiUrl(){
             return this.$store.getters['getApiUrl'];
         },
@@ -744,6 +766,9 @@ export default {
         },
         logo(){
             return this.$store.getters['getSkin'].header_desktop?.logo;
+        },
+        skins(){
+            return this.$store.getters['getSkin'];
         },
         showChangePassword() {
             if (this.$store.getters['getShowChangePassword']) {
