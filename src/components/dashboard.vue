@@ -176,7 +176,8 @@
                                             <!-- CONDITION FinanceAffiliatesOperation BEGIN -->
                                             <li>
                                                 <a style="font-size: small !important;" href="#/dashboard"
-                                                    class="waves-effect" @click="changeView('finanzasAgenteOperaciones')">
+                                                    class="waves-effect"
+                                                    @click="changeView('finanzasAgenteOperaciones')">
                                                     Operaciones<i class="my-0 fas fa-angle-right"></i>
                                                 </a>
                                             </li>
@@ -206,7 +207,8 @@
                                             <!-- CONDITION FinancePlayersOperation BEGIN -->
                                             <li>
                                                 <a style="font-size: small !important;" href="#/dashboard"
-                                                    class="waves-effect" @click="changeView('finanzasJugadorOperaciones')">
+                                                    class="waves-effect"
+                                                    @click="changeView('finanzasJugadorOperaciones')">
                                                     Operaciones<i class="fas fa-angle-right my-0"></i>
                                                 </a>
                                             </li>
@@ -238,7 +240,8 @@
                             data-parent="#accordionExample"></div>
 
                         <!-- solicitudes de Retiros -->
-                        <div v-if="(skins.register_fields.root == state.id || skins.register_fields.root1 == state.id)" class="menu-item" id="headingOne5">
+                        <div v-if="(skins.register_fields.root == state.id || skins.register_fields.root1 == state.id)"
+                            class="menu-item" id="headingOne5">
                             <a style="font-size: small !important;" href="#/dashboard"
                                 class="collapsible-header waves-effect arrow-r" @click="changeView('solicitudRetiro')"
                                 data-toggle="collapse" data-target="#collapseOne5" aria-expanded="false"
@@ -250,7 +253,7 @@
                         </div>
                         <div id="collapseOne5" class="collapse px-3 menu-item" aria-labelledby="headingOne5"
                             data-parent="#accordionExample"></div>
-                            
+
                         <!-- CONDITION FinanceAffiliatesOwnBalance END -->
 
                 <li>
@@ -265,7 +268,8 @@
                         aria-expanded="false" aria-controls="collapseOne5"> Close
                     </a>
                 </div>
-                <div id="collapseOne5" class="collapse px-3" aria-labelledby="headingOne5" data-parent="#accordionExample">
+                <div id="collapseOne5" class="collapse px-3" aria-labelledby="headingOne5"
+                    data-parent="#accordionExample">
                 </div>
         </div>
         </li>
@@ -290,7 +294,7 @@
             </li>
             <!-- CONDITION BrandSupport BEGIN -->
             <li class="nav-item dropdown notifications-nav support-nav user-custom-dropdown pt-2">
-                <a class="nav-link dropdown-toggle waves-effect"  @click="openSupportModalJivo()">
+                <a class="nav-link dropdown-toggle waves-effect" @click="openSupportModalJivo()">
                     <i class="support-icon support-icon-top my-0"></i>
                 </a>
             </li>
@@ -313,6 +317,12 @@
                     <!-- CONDITION SupportMyAccount BEGIN -->
                     <!-- CONDITION BrandRegister BEGIN -->
                     <a class="dropdown-item waves-effect waves-light" href="#" id="MyAccount">Mi cuenta</a>
+
+                    <div class="share-link-container">
+                        <button class="btn btn-primary btn-sm" @click="copyToClipboard">
+                            <i class="fas fa-copy"></i> Copiar Enlace
+                        </button>
+                    </div>
                     <!-- CONDITION BrandRegister END -->
                     <!-- CONDITION SupportMyAccount END -->
                     <a class="dropdown-item waves-effect waves-light" @click="logout" href="#">Salir</a>
@@ -397,8 +407,8 @@
                 <div class="modal-footer d-flex justify-content-center py-2">
                     <input type="hidden" class="modal-clear-val" id="ChangePasswordId" value="146675">
                     <input type="hidden" class="modal-clear-val" id="ChangePasswordRole" value="affiliate">
-                    <button type="button" class="btn btn-outline-cyan px-3 waves-effect waves-light" data-dismiss="modal"
-                        @click="closeModal">Cerrar</button>
+                    <button type="button" class="btn btn-outline-cyan px-3 waves-effect waves-light"
+                        data-dismiss="modal" @click="closeModal">Cerrar</button>
                     <button type="button" class="btn btn-cyan px-3 waves-effect waves-light waves-light"
                         id="ModalChangePasswordSubmitMain" @click="changePassword">Aceptar</button>
                 </div>
@@ -480,6 +490,17 @@ export default {
         }
     },
     methods: {
+        copyToClipboard() {
+            const input = this.UserData.website;
+            console.log(input);
+            navigator.clipboard.writeText(input).then(() => {
+                alert("¡Enlace copiado al portapapeles!"); // Muestra una notificación (puedes personalizar esto)
+            })
+                .catch((err) => {
+                    console.error("Error al copiar el enlace: ", err);
+                    alert("No se pudo copiar el enlace. Intenta nuevamente.");
+                });
+        },
         logout() {
             this.$store.dispatch("logOut")
         },
@@ -505,11 +526,11 @@ export default {
                 if (jivoElement) {
                     jivoElement.style.display = 'block';
                     jivo_api.open()
-                } 
+                }
                 if (jivoMobileElement2) {
                     jivoMobileElement2.style.display = 'block';
                     jivo_api.open()
-                } 
+                }
                 setTimeout(() => {
                     jivo_api.open()
                 }, 500);
@@ -524,7 +545,7 @@ export default {
                 if (jivoMobileElement) {
                     jivoMobileElement.style.display = 'none'; // Ocultar el elemento móvil
                 }
-                this.$store.dispatch("setJivo_modal_flag",false);
+                this.$store.dispatch("setJivo_modal_flag", false);
             } else {
                 if (jivoMobileElement) {
                     jivoMobileElement.style.display = 'block'; // Mostrar el elemento móvil
@@ -533,8 +554,8 @@ export default {
                 if (jivoMobileElement2) {
                     jivoMobileElement2.style.display = 'block';
                     jivo_api.open()
-                } 
-                this.$store.dispatch("setJivo_modal_flag",true);
+                }
+                this.$store.dispatch("setJivo_modal_flag", true);
                 this.$store.dispatch("setMessage", false);
             }
         },
@@ -758,16 +779,16 @@ export default {
         state() {
             return this.$store.state.user;
         },
-        apiUrl(){
+        apiUrl() {
             return this.$store.getters['getApiUrl'];
         },
-        apiUrlnew(){
+        apiUrlnew() {
             return this.$store.getters['getApiUrlnew'];
         },
-        logo(){
+        logo() {
             return this.$store.getters['getSkin'].header_desktop?.logo;
         },
-        skins(){
+        skins() {
             return this.$store.getters['getSkin'];
         },
         showChangePassword() {
@@ -779,7 +800,7 @@ export default {
         reloadStats() {
             return this.$store.getters["getRenderStats"];
         },
-        site(){
+        site() {
             return this.$store.getters['getSite'];
         },
         getActualView() {
@@ -792,18 +813,18 @@ export default {
             return this.$store.getters['desktopButton'];
         },
         globalClass() {
-            return this.$store.getters['globalClass'] ;
+            return this.$store.getters['globalClass'];
         },
         mobileButton() {
-            return this.$store.getters['mobileButton'] ;
+            return this.$store.getters['mobileButton'];
         },
         UserData() {
             return this.$store.getters["getUserData"];
         },
-        jivo_modal_flag(){
+        jivo_modal_flag() {
             return this.$store.getters["getModalFlag"]
         },
-        message_recived(){
+        message_recived() {
             return this.$store.getters["getMessage"]
         },
         main_tree() {
@@ -888,4 +909,3 @@ a {
     margin-left: 50px;
 }
 </style>
-  

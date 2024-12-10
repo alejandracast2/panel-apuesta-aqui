@@ -63,6 +63,7 @@ export default new Vuex.Store({
             site_id:0,
             site:"",
             prefix:"",
+            website:""
         },
         widget_load:false,
         jivo_modal_flag:false,
@@ -208,6 +209,7 @@ export default new Vuex.Store({
             state.user.prefix = payload.prefix;
         },
         setBalance(state,payload){
+            state.user.website = payload.data.website;
             state.user.name = payload.data.username;
             state.user.id = payload.data.id;
             state.user.balance = payload.data.balance;
@@ -699,7 +701,6 @@ export default new Vuex.Store({
             state.commit("setCasinoBrands", response2.data.proveedores.casino);
         
             if (!payload.origin) {
-                console.log(response2.data);
                 state.dispatch("getChartsData",response2.data.id) 
                 state.dispatch("getMainTree", { data: response2.data });
             }

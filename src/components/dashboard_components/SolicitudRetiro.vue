@@ -19,10 +19,37 @@
                         <span class="visually-hidden">Cargando...</span>
                       </div>
                     </div>
-                    <div class="col-6 offset-1 col-sm-4 offset-sm-3 col-md-3 offset-md-0 col-lg-3 pl-md-4">
-                      <div class="md-form font-size-custom2 mt-2 mb-md-1 my-lg-2">
-                        <input type="text" v-model="bankFilter" placeholder="Buscar" class="form-control search-username" maxlength="16">
-                        
+                    <div class="row mb-3">
+                      <div class="col-md-4">
+                        <div class="md-form font-size-custom2 mt-2 mb-md-1 my-lg-2">
+                          <input type="text" v-model="bankFilter" placeholder="Buscar"
+                            class="form-control search-username" maxlength="16">
+                        </div>
+                      </div>
+                      <div class="col-md-3 my-lg-2">
+                        <section class="section-preview">
+                          <div class="select-wrapper mdb-select col-8">
+                            <span class="caret">▼</span>
+                            <input type="text" class="select-dropdown w-100 text-center active" @click="showMoreoption"
+                              readonly="true" value="" v-model="estado_filter">
+                            <ul id="selectEstado" class="dropdown-content select-dropdown w-100 text-center active"
+                              style="width: 82.125px; position: absolute; top: 100%; left: 15px; opacity: 1; 
+                                                                display: none;">
+                              <li :class="estado_filter == 'Todo' ? 'active' : ''"  @click="filterSolicitudes(3)">
+                                <span class="filtrable">Todos</span>
+                              </li>
+                              <li :class="estado_filter ==  'Pendiente' ? 'active' : ''"  @click="filterSolicitudes(0)">
+                                <span class="filtrable">Pendientes</span>
+                              </li>
+                              <li :class="estado_filter == 'Aprobado' ? 'active' : ''"  @click="filterSolicitudes(1)">
+                                <span class="filtrable">Aprobados</span>
+                              </li>
+                              <li :class="estado_filter == 'Rechazado' ? 'active' : ''"  @click="filterSolicitudes(2)">
+                                <span class="filtrable">Rechazados</span>
+                              </li>
+                            </ul>
+                          </div>
+                        </section>
                       </div>
                     </div>
                     <!-- <div>
@@ -99,11 +126,6 @@
                                 <span class="filtrable">50</span>
                               </li>
                             </ul>
-                            <select name="users_length" aria-controls="users" class="mdb-select col-4 initialized">
-                              <option value="10">10</option>
-                              <option value="25">25</option>
-                              <option value="50">50</option>
-                            </select>
                           </div>
                         </section>
                       </div>
@@ -231,6 +253,7 @@ export default {
       bankFilter: "",
       actual_page: 1,
       registers_per_page: 10,
+      estado_filter: "Todos",
       pages: [],
       records: 0,
     }
@@ -251,6 +274,20 @@ export default {
     }
   },
   methods: {
+    filterSolicitudes(estadoSeleccionado) {
+    this.estado_filter=estadoSeleccionado;
+    this.estado_filter= this.mapEstado(this.estado_filter);
+    if (estadoSeleccionado === 3) {
+      // Si se selecciona "Todo", no se aplica ningún filtro
+      this.solicitudesFiltered = this.solicitudes;
+    } else {
+      // Filtra las solicitudes basadas en el estado
+      this.solicitudesFiltered = this.solicitudes.filter(
+        (solicitud) => solicitud.estado === estadoSeleccionado
+      );
+    }
+    this.showMoreoption(); // Cierra el dropdown después de aplicar el filtro
+  },
     changePage(page) {
       this.actual_page = page
     },
@@ -259,6 +296,14 @@ export default {
     },
     nextPage() {
       this.actual_page += 1;
+    },
+    showMoreoption() {
+      const dropdown = document.getElementById("selectEstado");
+      if (dropdown.style.display === "block") {
+        dropdown.style.display = "none"; // Cierra el dropdown si está abierto
+      } else {
+        dropdown.style.display = "block"; // Abre el dropdown si está cerrado
+      }
     },
     showMaxRegisterSelection() {
       document.getElementById("selectPage").style.display = "block";
@@ -332,6 +377,7 @@ export default {
         });
         this.solicitudes = response.data;// Asigna los datos de la API
         this.solicitudesFiltered = response.data;
+        console.log(this.solicitudes)
 
       } catch (error) {
         console.error("Error al obtener las solicitudes:", error);
@@ -368,6 +414,8 @@ export default {
           return "Aprobado";
         case 2:
           return "Rechazado";
+        case 3:
+          return "Todos";
         default:
           return "Desconocido"; // Opcional, por si se recibe un estado no esperado
       }
