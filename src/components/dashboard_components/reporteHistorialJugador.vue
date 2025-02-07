@@ -90,6 +90,9 @@
                                                             class="sorting_disabled dt-operation text-center pl-sm-3"
                                                             rowspan="1" colspan="1" style="width: 183px;">Proveedor</th>
                                                         <th scope="col"
+                                                            class="sorting_disabled dt-operation text-center pl-sm-3"
+                                                            rowspan="1" colspan="1" style="width: 183px;">Juego</th>
+                                                        <th scope="col"
                                                             class="sorting_disabled dt-username text-center pl-sm-3"
                                                             rowspan="1" colspan="1" style="width: 146px;">Operacion</th>
                                                         <th scope="col"
@@ -111,13 +114,15 @@
                                                         v-for="(item, index) in paginarArray(reportData, registers_per_page)[actual_page - 1]"
                                                         :key="index">
                                                         <td class=" d-none d-sm-block dt-date text-center">{{
-            formatearFecha(item.fecha) }}</td>
+                                                            formatearFecha(item.fecha) }}</td>
                                                         <td class="dt-operation pl-sm-3 text-left">{{ item.proveedor }}
+                                                        </td>
+                                                        <td class=" dt-username text-center pl-sm-3">{{ item.juego }}
                                                         </td>
                                                         <td class=" dt-username text-center pl-sm-3">{{ item.operacion
                                                             }}</td>
                                                         <td class="dt-amount pr-sm-3 text-right">{{
-            parseNumbers(item.valor) }}</td>
+                                                            parseNumbers(item.valor) }}</td>
                                                         <td class="dt-before d-none d-lg-table-cell pr-sm-3 text-right">
                                                             {{ parseNumbers(item.antiguo_capital) }}</td>
                                                         <td class="dt-after d-none d-lg-table-cell pr-sm-3 text-right">
@@ -147,7 +152,7 @@
                                                                     @click="setRegistersPerPage(25)">
                                                                     <span class="filtrable">25</span>
                                                                 </li>
-                                                                <li :class="registers_per_page==50?'active':''"
+                                                                <li :class="registers_per_page == 50 ? 'active' : ''"
                                                                     @click="setRegistersPerPage(50)">
                                                                     <span class="filtrable">50</span>
                                                                 </li>
@@ -162,7 +167,7 @@
                                                     </section>
                                                 </div>
                                                 <div class="dataTables_paginate paging_simple_numbers col-12 col-md-6">
-                                                    <pagination :options="{texts:{count:''}}" v-model="actual_page"
+                                                    <pagination :options="{ texts: { count: '' } }" v-model="actual_page"
                                                         :records="records" :per-page="registers_per_page"
                                                         @paginate="paginate" />
                                                 </div>
@@ -217,13 +222,13 @@ export default {
         targetUser() {
             return this.$store.getters["getTargetUser"];
         },
-        userInfo(){
+        userInfo() {
             return this.$store.getters["getUserData"];
         },
-        apiUrlnew(){
+        apiUrlnew() {
             return this.$store.getters['getApiUrlnew'];
         },
-        site(){
+        site() {
             return this.$store.getters['getSite'];
         }
     },
@@ -244,7 +249,7 @@ export default {
                         "endDate": this.getFechaFormated(this.endDate) + " " + this.endHour + ":00",
                         "token": this.userInfo.token,
                         "timezone": timezoneFormated,
-                        "site":this.site
+                        "site": this.site
                     })
                 if (response.data) {
                     this.reportData = response.data;
