@@ -2982,17 +2982,19 @@ export default {
 
             try {
                 let loginInfo = this.new_user_data.username != "" && this.new_user_data.password != "" ? true : false;
-                let comisions = this.new_user_data.proveedores.pokerTotal == "" && this.new_user_data.proveedores.casinoTotal == "" && this.new_user_data.proveedores.deportesTotal == "" ? false : true;
+                // let comisions = this.new_user_data.proveedores.pokerTotal == "" && this.new_user_data.proveedores.casinoTotal == "" && this.new_user_data.proveedores.deportesTotal == "" ? false : true;
 
                 if (!loginInfo) {
                     this.new_user_data.error = "Debes completar los datos de Ingreso";
                     createBtn.innerHTML = "Aceptar";
                     createBtn.disabled = false;
-                } else if (this.new_user_data.type == "agente" && !comisions) {
-                    document.getElementById("NewUserTabAffiliate4Link").click();
-                    createBtn.innerHTML = "Aceptar";
-                    createBtn.disabled = false;
-                } else {
+                } 
+                // else if (this.new_user_data.type == "agente" && !comisions) {
+                //     document.getElementById("NewUserTabAffiliate4Link").click();
+                //     createBtn.innerHTML = "Aceptar";
+                //     createBtn.disabled = false;
+                // }
+                 else {
                     let data = {};
                     let allCasinoBrandsCopy = JSON.parse(JSON.stringify(this.all_casino_brands));
                     let parsedCasino = this.new_user_data.proveedores.casino.map(brand => {
@@ -3070,26 +3072,7 @@ export default {
 
                     let endpoint = this.new_user_data.type == "agente" ? "crear_agente" : "crear_jugador";
                     let response;
-
-                    try {
-                        // Intentar la primera petición con la nueva URL
-                        response = await axios.post(this.apiUrlnew + endpoint, data);
-
-                        if (response.data.error) {
-                            throw new Error("Error en la respuesta de la nueva URL");
-                        }
-
-                    } catch (error) {
-                        console.log("Fallo en la primera URL, intentando con la de respaldo...");
-
-                        // Intentar la petición con la URL de respaldo
-                        response = await axios.post(this.apiUrl + "/" + endpoint, data);
-
-                        if (response.data.error) {
-                            throw new Error("Error en la respuesta de la URL de respaldo");
-                        }
-                    }
-
+                    response = await axios.post(this.apiUrlnew + endpoint, data);
                     if (response.data.error) {
                         this.new_user_data.error = response.data.error;
                         createBtn.innerHTML = "Aceptar";
