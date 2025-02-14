@@ -1444,18 +1444,17 @@ export default {
                 let loginInfo = this.new_user_data.username != "" && this.new_user_data.password != "" ? true : false;
 
                 // let comisions = this.new_user_data.proveedores.pokerTotal == "" && this.new_user_data.proveedores.casinoTotal == "" && this.new_user_data.proveedores.deportesTotal == "" ? false : true;
-
+                
                 if (!loginInfo) {
                     this.new_user_data.error = "Debes completar los datos de Ingreso";
                     createBtn.innerHTML = "Aceptar";
                     createBtn.disabled = false;
                 }
-                else if (this.new_user_data.type=="jugador" && this.new_user_data.document == null && this.skins.register_fields.document) {
+                else if ((this.new_user_data.type=="jugador"||this.new_user_data.type=="" ) && (this.new_user_data.document == null) && this.skins.register_fields.document) {
                     this.new_user_data.error = "Debes subir el documento de identidad";
                     createBtn.innerHTML = "Aceptar";
                     createBtn.disabled = false;
                 }
-                
                 else {
                     let data = {};
                     let allCasinoBrandsCopy = JSON.parse(JSON.stringify(this.all_casino_brands));
