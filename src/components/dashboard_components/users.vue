@@ -402,12 +402,14 @@
                                         <div class="col-7 modal-view-info-content" id="ModalViewInfocreated">{{
                                             formatearFecha(target_user_info.created_at) }}</div>
                                     </div>
-                                    <div v-if="parseRole(target_user_info.roles) == 'Jugador' && (skins.register_fields.root == state.id || skins.register_fields.root1 == state.id)" class="row">
+                                    <div v-if="parseRole(target_user_info.roles) == 'Jugador' && (skins.register_fields.root == state.id || skins.register_fields.root1 == state.id)"
+                                        class="row">
                                         <div class="col-5 modal-view-info-data mb-3">Nombre y id:</div>
                                         <div class="col-7 modal-view-info-content" id="ModalViewInfoname">
                                             {{ target_user_info.firstname }}</div>
                                     </div>
-                                    <div v-if="parseRole(target_user_info.roles) == 'Jugador' && (skins.register_fields.root == state.id || skins.register_fields.root1 == state.id)" class="row">
+                                    <div v-if="parseRole(target_user_info.roles) == 'Jugador' && (skins.register_fields.root == state.id || skins.register_fields.root1 == state.id) && this.updocumento"
+                                        class="row">
                                         <div class="col-12 text-center">
                                             <button type="button" class="btn btn-primary btn-sm" id="viewDocumentButton"
                                                 @click="verDocumento(target_user_info.id)">
@@ -440,6 +442,18 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div v-if="!this.updocumento">
+                                    <input type="file" id="registerDocument" class="form-control"
+                                        style="margin-bottom: 5px;" @change="handleFileUpload" accept=".pdf" required>
+                                    <small class="form-text text-muted">Sube tu documento en formato
+                                        PDF.</small>
+                                    <button class="btn btn-outline-primary form-control" type="button" id="inputGroupFileAddon04"
+                                        style="margin: 0px !important;"
+                                        @click="uploadDocument(target_user_info.id)">Sube el
+                                        documento de identidad</button>
+                                </div>
+
+
                             </div>
                         </div>
                         <div class="modal-footer d-flex justify-content-center py-2">
@@ -1239,6 +1253,13 @@
                                                         class="form-control new-player-input modal-clear-val"
                                                         autocomplete="off" maxlength="32" v-model="new_user_data.dni">
                                                     <label for="NewUserPlayerPassport">Documento</label>
+                                                </div>
+                                                <div v-if="skins.register_fields.document" class="mb-3">
+                                                    <label for="registerDocument">Sube el Documento de identidad</label>
+                                                    <input type="file" id="registerDocument" class="form-control"
+                                                        @change="handleFileUpload" accept=".pdf" required>
+                                                    <small class="form-text text-muted">Sube tu documento en formato
+                                                        PDF.</small>
                                                 </div>
                                                 <div class="md-form mb-5 font-size-custom">
                                                     <i class="far fa-envelope prefix grey-text"></i>
@@ -2108,6 +2129,7 @@ export default {
     props: ["view_type"],
     data() {
         return {
+            updocumento: false,
             errorMessage: '',
             user: {},
             showPopover2: false,
@@ -2152,6 +2174,7 @@ export default {
                 liquidacion: ""
             },
             new_user_data: {
+                document: null,
                 type: "",
                 username: "",
                 email: "",
@@ -2232,6 +2255,36 @@ export default {
         }
     },
     methods: {
+        async uploadDocument(userId) {
+            try {
+                if (this.new_user_data.document == null) {
+                    this.errorMessage = "Sube el documento de identidad";
+                }
+                let formData = new FormData();
+                formData.append('document', this.new_user_data.document);
+                formData.append('userId', userId); // Agrega el ID al FormData si es necesario
+                formData.append('site', this.site);
+
+                let response = await axios.post(this.apiUrlnew + "document", formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data' // Asegúrate de enviar el tipo de contenido correcto
+                    }
+                });
+                if (response.data.error) {
+                    this.errorMessage = response.data.error;
+                }
+                else if(response.data.status == "success"){
+                    this.closeModal();
+                    this.showAlert("alert-success", "Proceso correcto", "Documento subido correctamente");
+                }
+            } catch (error) {
+                console.error('Error uploading document:', error);
+                // Manejo de errores adicional
+            }
+        },
+        handleFileUpload(event) {
+            this.new_user_data.document = event.target.files[0]; // Captura el archivo seleccionado
+        },
         showUsersCapital(id, name) {
             this.$store.dispatch("getChildrenTree", { id: id, name: name });
             this.closeModal()
@@ -2436,12 +2489,11 @@ export default {
                 if (response.data.error) {
                     this.errorMessage = response.data.error;
                 }
-                if (response.data.status=="success") {
+                if (response.data.status == "success") {
                     window.open(response.data.ftpUrl, "_blank");
                 }
-                return null
+                return response.data.error;
             } catch (error) {
-                // Si ocurre un error en la solicitud, también actualizamos el errorMessage
                 this.errorMessage = 'Ha ocurrido un error al procesar la solicitud.';
                 console.error(error);
                 return null;
@@ -2449,12 +2501,22 @@ export default {
         },
         async openUserInfoModal(id) {
             try {
-                this.errorMessage='';
+                this.errorMessage = '';
                 this.target_user_id = id;
                 this.target_user_info = {};
                 this.backdrop(true)
                 let modal = document.getElementById("ModalViewInfo");
                 this.target_user_info = await this.getUserServerData(id);
+                if (this.target_user_info.roles.split('"')[1].split("_")[1] == "APOSTADOR") {
+                    let response = await axios.get(this.apiUrlnew + "documento", {
+                        params: {
+                            "users": id,
+                            "token": this.userInfo.token,
+                            "autorizado": this.state.id
+                        }
+                    })
+                    this.updocumento = response.data.error == "Archivo no encontrado o no disponible" ? false : true;
+                }
                 modal.classList.add("show");
                 modal.style.display = "block"
             } catch (error) {
@@ -2988,13 +3050,13 @@ export default {
                     this.new_user_data.error = "Debes completar los datos de Ingreso";
                     createBtn.innerHTML = "Aceptar";
                     createBtn.disabled = false;
-                } 
-                // else if (this.new_user_data.type == "agente" && !comisions) {
-                //     document.getElementById("NewUserTabAffiliate4Link").click();
-                //     createBtn.innerHTML = "Aceptar";
-                //     createBtn.disabled = false;
-                // }
-                 else {
+                }
+                else if (this.new_user_data.type=="jugador" && this.new_user_data.document == null && this.skins.register_fields.document) {
+                    this.new_user_data.error = "Debes subir el documento de identidad";
+                    createBtn.innerHTML = "Aceptar";
+                    createBtn.disabled = false;
+                }
+                else {
                     let data = {};
                     let allCasinoBrandsCopy = JSON.parse(JSON.stringify(this.all_casino_brands));
                     let parsedCasino = this.new_user_data.proveedores.casino.map(brand => {
@@ -3077,7 +3139,17 @@ export default {
                         this.new_user_data.error = response.data.error;
                         createBtn.innerHTML = "Aceptar";
                         createBtn.disabled = false;
-                    } else {
+                    }
+                    else if(this.new_user_data.type=="jugador" && this.skins.register_fields.document){
+                        const userId = response.data.userId;
+                        await this.uploadDocument(userId);
+                        this.$store.dispatch("getChildrenCapital2", this.$store.getters["getTargetUser"]);
+                        this.showAlert("alert-success", "Proceso correcto", "Usuario creado con éxito");
+                        createBtn.innerHTML = "Aceptar";
+                        createBtn.disabled = false;
+                        this.closeModal();
+                    }
+                     else {
                         this.$store.dispatch("getChildrenCapital2", this.$store.getters["getTargetUser"]);
                         this.showAlert("alert-success", "Proceso correcto", "Usuario creado con éxito");
                         createBtn.innerHTML = "Aceptar";

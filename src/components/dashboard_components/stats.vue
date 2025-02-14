@@ -14,12 +14,16 @@
                                     id="QuickUse_container">
                                     <div class="row mx-auto">
                                         <div class="col-6 px-0 text-center">
-                                            <button class="btn btn-sm btn-danger waves-effect waves-light" @click="openModal('ModalNewUser',main_tree.id,'jugador')"
+                                            <button class="btn btn-sm btn-danger waves-effect waves-light"
+                                                @click="openModal('ModalNewUser', main_tree.id, 'jugador')"
                                                 id="NewPlayerButton"><i class="fas fa-user"></i> Nuevo Jugador</button>
                                         </div>
-                                        <div v-if="skins.register_fields.root == state.id || skins.register_fields.root1 == state.id" class="col-6 px-0 text-center">
-                                            <button class="btn btn-sm btn-danger waves-effect waves-light" @click="openModal('ModalNewUser',main_tree.id,'agente')"
-                                                id="NewAffiliateButton"><i class="fas fa-users"></i> Nuevo Agente</button>
+                                        <div v-if="skins.register_fields.root == state.id || skins.register_fields.root1 == state.id"
+                                            class="col-6 px-0 text-center">
+                                            <button class="btn btn-sm btn-danger waves-effect waves-light"
+                                                @click="openModal('ModalNewUser', main_tree.id, 'agente')"
+                                                id="NewAffiliateButton"><i class="fas fa-users"></i> Nuevo
+                                                Agente</button>
                                         </div>
                                         <div id="UserSearchDiv" class="col-12 mt-3 mb-lg-3">
                                             <div class="row mx-auto">
@@ -31,13 +35,13 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-2 offset-1 mt-3">
-                                                    <button @click="openModalCredit('ModalCredit','Cargar Fichas')"
+                                                    <button @click="openModalCredit('ModalCredit', 'Cargar Fichas')"
                                                         class="mb-1 mt-1 ml-0 mr-1 ml-md-2 btn btn-floating cyan waves-effect waves-light btn-action btn-credit btn-add-credit"
                                                         alt="Cargar Fichas" title="Cargar Fichas"><i class="fas fa-plus"
                                                             aria-hidden="true"></i></button>
                                                 </div>
                                                 <div class="col-2 mt-3 ml-2">
-                                                    <button @click="openModalCredit('ModalCredit','Descargar Fichas')"
+                                                    <button @click="openModalCredit('ModalCredit', 'Descargar Fichas')"
                                                         class="mb-1 mt-1 mx-0 mx-sm-2 btn btn-floating cyan waves-effect waves-light btn-action btn-credit btn-deduct-credit"
                                                         alt="Descargar Fichas" title="Descargar Fichas"><i
                                                             class="fas fa-minus" aria-hidden="true"></i></button>
@@ -75,12 +79,21 @@
                                     </div>
                                     <div class="col-md-10 mx-auto text-center">
                                         <p class="my-4">Mes actual: <strong><span id="MonthlyEarningCurrent"
-                                                    class="hide-value">{{ parseNumbers(chartDataNetwinTotal.mes_actual) }}</span></strong></p>
+                                                    class="hide-value">{{ parseNumbers(chartDataNetwinTotal.mes_actual)
+                                                    }}</span></strong></p>
                                         <p class="my-4">Mes anterior: <strong><span id="MonthlyEarningPrevious"
-                                                    class="hide-value">{{ parseNumbers(chartDataNetwinTotal.mes_anterior) }}</span></strong></p>
+                                                    class="hide-value">{{
+                                                        parseNumbers(chartDataNetwinTotal.mes_anterior) }}</span></strong>
+                                        </p>
                                         <h5 class="my-4">
-                                            <span class="badge p-2" :class="chartDataNetwinTotal.mes_actual - chartDataNetwinTotal.mes_anterior < 0 ? 'red' : 'green'" id="MonthlyEarningTrend">{{ chartDataNetwinTotal.mes_actual - chartDataNetwinTotal.mes_anterior < 0 ? '-' : '+' }}{{ (((chartDataNetwinTotal.mes_actual - chartDataNetwinTotal.mes_anterior) / chartDataNetwinTotal.mes_anterior) * 100).toFixed(2)}}%</span>
-                                            <i class="ml-3 far fa-eye-slash hide-values"></i>
+                                            <span class="badge p-2"
+                                                :class="chartDataNetwinTotal.mes_actual - chartDataNetwinTotal.mes_anterior < 0 ? 'red' : 'green'"
+                                                id="MonthlyEarningTrend">{{ chartDataNetwinTotal.mes_actual -
+                                                    chartDataNetwinTotal.mes_anterior < 0 ? '-' : '+' }}{{
+                                                    (((chartDataNetwinTotal.mes_actual -
+                                                        chartDataNetwinTotal.mes_anterior) /
+                                                        chartDataNetwinTotal.mes_anterior) * 100).toFixed(2) }}%</span>
+                                                    <i class="ml-3 far fa-eye-slash hide-values"></i>
                                         </h5>
                                     </div>
                                 </div>
@@ -97,7 +110,8 @@
                                         style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
                                         <div class="chartjs-size-monitor-expand"
                                             style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-                                            <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0">
+                                            <div
+                                                style="position:absolute;width:1000000px;height:1000000px;left:0;top:0">
                                             </div>
                                         </div>
                                         <div class="chartjs-size-monitor-shrink"
@@ -105,7 +119,7 @@
                                             <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
                                         </div>
                                     </div>
-                                        <canvas id="netwinChart" width="504" height="252"></canvas>
+                                    <canvas id="netwinChart" width="504" height="252"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -120,7 +134,8 @@
                                         style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
                                         <div class="chartjs-size-monitor-expand"
                                             style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-                                            <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0">
+                                            <div
+                                                style="position:absolute;width:1000000px;height:1000000px;left:0;top:0">
                                             </div>
                                         </div>
                                         <div class="chartjs-size-monitor-shrink"
@@ -143,7 +158,8 @@
                                         style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
                                         <div class="chartjs-size-monitor-expand"
                                             style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-                                            <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0">
+                                            <div
+                                                style="position:absolute;width:1000000px;height:1000000px;left:0;top:0">
                                             </div>
                                         </div>
                                         <div class="chartjs-size-monitor-shrink"
@@ -167,7 +183,8 @@
                         <div class="modal-header text-center gradient-card-header blue-gradient">
                             <h5 class="modal-title w-100 font-weight-bold text-left ml-0" id="ModalCreditTitle">
                                 {{ credit_modal.action }}</h5>
-                            <button type="button" class="close mr-0" data-dismiss="modal" aria-label="Close" @click="closeModal">
+                            <button type="button" class="close mr-0" data-dismiss="modal" aria-label="Close"
+                                @click="closeModal">
                                 <span aria-hidden="true">×</span>
                             </button>
                         </div>
@@ -201,8 +218,10 @@
                                             <i class="fas fa-user" aria-hidden="true"></i>
                                         </span>
                                     </div>
-                                    <input type="text" class="d-inline-block form-control form-modal-input modal-clear-val px-1"
-                                        id="ModalCreditDestinationUsername" readonly="" :value="credit_modal.username" :style="credit_modal.role=='ROLE_PROMOTOR'?'color:blue;':'color:red;'">
+                                    <input type="text"
+                                        class="d-inline-block form-control form-modal-input modal-clear-val px-1"
+                                        id="ModalCreditDestinationUsername" readonly="" :value="credit_modal.username"
+                                        :style="credit_modal.role == 'ROLE_PROMOTOR' ? 'color:blue;' : 'color:red;'">
                                     <input type="text"
                                         class="d-inline-block form-control form-modal-input modal-clear-val text-right"
                                         id="ModalCreditDestinationBalance" readonly="" :value="credit_modal.balance">
@@ -215,47 +234,54 @@
                                             </span>
                                         </div>
                                         <input type="text" class="form-control form-modal-input text-right"
-                                            id="ModalCreditAmount" aria-label="Amount" autocomplete="off" value="0"  @input="parseNumbers('','ModalCreditAmount')">
+                                            id="ModalCreditAmount" aria-label="Amount" autocomplete="off" value="0"
+                                            @input="parseNumbers('', 'ModalCreditAmount')">
                                         <input type="hidden" class="modal-clear-val" id="ModalCreditAction">
                                     </div>
                                     <div class="input-group col-4 col-xl-4 p-0 text-center">
                                         <!-- CONDITION NumberFormat1 BEGIN -->
                                         <button
                                             class="mb-1 mt-1 mr-1 btn btn-floating cyan waves-effect waves-light btn-action btn-credit-mod btn-add"
-                                            step="50" id="ModalCreditAdd" title="Aumentar" @click="addValue('ModalCreditAmount',50)"><i class="fas fa-plus"
+                                            step="50" id="ModalCreditAdd" title="Aumentar"
+                                            @click="addValue('ModalCreditAmount', 50)"><i class="fas fa-plus"
                                                 aria-hidden="true"></i></button>
                                         <button
                                             class="mb-1 mt-1 btn btn-floating cyan waves-effect waves-light btn-action btn-credit-mod btn-deduct"
-                                            step="-50" id="ModalCreditDeduct" title="Disminuir" @click="removeValue('ModalCreditAmount',50)"><i class="fas fa-minus"
+                                            step="-50" id="ModalCreditDeduct" title="Disminuir"
+                                            @click="removeValue('ModalCreditAmount', 50)"><i class="fas fa-minus"
                                                 aria-hidden="true"></i></button>
                                         <!-- CONDITION NumberFormat1 END -->
                                     </div>
                                 </div>
                                 <div class="row px-2 px-sm-2 mb-2 px-xl-2">
                                     <div class="input-group col-12 p-0 text-center">
-                                         <!-- CONDITION NumberFormat1 BEGIN -->
-                                         <button
+                                        <!-- CONDITION NumberFormat1 BEGIN -->
+                                        <button
                                             class="mb-1 mt-1 mr-2 mr-sm-2 mr-xl-2 btn btn-outline-cyan btn-sm px-3 waves-effect waves-light btn-action-sub btn-credit-mod btn-add100"
-                                            step="100" id="ModalCreditAdd100" title="Aumentar 100" @click="addValue('ModalCreditAmount',100)">
-                                            <i class="fas fa-plus"
-                                                aria-hidden="true"></i> 100</button>
+                                            step="100" id="ModalCreditAdd100" title="Aumentar 100"
+                                            @click="addValue('ModalCreditAmount', 100)">
+                                            <i class="fas fa-plus" aria-hidden="true"></i> 100</button>
                                         <button
                                             class="mb-1 mt-1 mr-2 mr-sm-2 mr-xl-2 btn btn-outline-cyan btn-sm px-3 waves-effect waves-light btn-action-sub btn-credit-mod btn-add1000"
-                                            step="1000" id="ModalCreditAdd1000" title="Aumentar 1.000" @click="addValue('ModalCreditAmount',1000)"><i
-                                                class="fas fa-plus" aria-hidden="true"></i> 1.000</button>
+                                            step="1000" id="ModalCreditAdd1000" title="Aumentar 1.000"
+                                            @click="addValue('ModalCreditAmount', 1000)"><i class="fas fa-plus"
+                                                aria-hidden="true"></i> 1.000</button>
                                         <button
                                             class="mb-1 mt-1 btn btn-outline-cyan btn-sm px-3 waves-effect waves-light btn-action-sub btn-credit-mod btn-add10000"
-                                            step="10000" id="ModalCreditAdd10000" title="Aumentar 10.000" @click="addValue('ModalCreditAmount',10000)"><i
-                                                class="fas fa-plus" aria-hidden="true"></i> 10.000</button>
+                                            step="10000" id="ModalCreditAdd10000" title="Aumentar 10.000"
+                                            @click="addValue('ModalCreditAmount', 10000)"><i class="fas fa-plus"
+                                                aria-hidden="true"></i> 10.000</button>
                                         <!-- CONDITION NumberFormat1 END -->
                                     </div>
                                 </div>
-                                <div class="row pt-3 px-2 px-xl-2 modal-credit-register-finance" v-if="credit_modal.role=='ROLE_APOSTADOR'&&credit_modal.action=='Cargar Fichas'">
+                                <div class="row pt-3 px-2 px-xl-2 modal-credit-register-finance"
+                                    v-if="credit_modal.role == 'ROLE_APOSTADOR' && credit_modal.action == 'Cargar Fichas'">
                                     <div class="col-10 text-left">
                                         <div class="row">
                                             <div class="col-12 form-check text-left">
                                                 <input type="checkbox" class="form-check-input"
-                                                    id="ModalCreditRegisterFinanceCollect" @change="makeOneCheck('ModalCreditRegisterFinanceCollect','ModalCreditRegisterFinanceBonification')">
+                                                    id="ModalCreditRegisterFinanceCollect"
+                                                    @change="makeOneCheck('ModalCreditRegisterFinanceCollect', 'ModalCreditRegisterFinanceBonification')">
                                                 <label class="form-check-label font-size-custom"
                                                     for="ModalCreditRegisterFinanceCollect">Registrar
                                                     Cobrado</label>
@@ -264,7 +290,8 @@
                                         <div class="row">
                                             <div class="col-12 form-check text-left">
                                                 <input type="checkbox" class="form-check-input"
-                                                    id="ModalCreditRegisterFinanceBonification" @change="makeOneCheck('ModalCreditRegisterFinanceBonification','ModalCreditRegisterFinanceCollect')">
+                                                    id="ModalCreditRegisterFinanceBonification"
+                                                    @change="makeOneCheck('ModalCreditRegisterFinanceBonification', 'ModalCreditRegisterFinanceCollect')">
                                                 <label class="form-check-label font-size-custom"
                                                     for="ModalCreditRegisterFinanceBonification">Registrar
                                                     Bonificado</label>
@@ -280,7 +307,8 @@
                                         </button>
                                     </div>
                                 </div>
-                                <div class="row pt-3 px-2 px-xl-2 modal-credit-register-finance" v-if="credit_modal.role=='ROLE_APOSTADOR'&&credit_modal.action=='Descargar Fichas'">
+                                <div class="row pt-3 px-2 px-xl-2 modal-credit-register-finance"
+                                    v-if="credit_modal.role == 'ROLE_APOSTADOR' && credit_modal.action == 'Descargar Fichas'">
                                     <div class="col-10 text-left">
                                         <div class="row">
                                             <div class="col-12 form-check text-left">
@@ -307,12 +335,13 @@
                             <button type="button" class="btn btn-outline-cyan px-3 waves-effect waves-light"
                                 data-dismiss="modal" @click="closeModal">Cancelar</button>
                             <button type="button" class="btn btn-cyan px-3 waves-effect waves-light"
-                                id="ModalCreditSubmit" :disabled="credit_modal.value=='0'" @click="cargar_descargar_Fichas">Aceptar</button>
+                                id="ModalCreditSubmit" :disabled="credit_modal.value == '0'"
+                                @click="cargar_descargar_Fichas">Aceptar</button>
                         </div>
                     </div>
                 </div>
             </div>
-        <div class="modal fade" id="ModalNewUser" tabindex="-1" role="dialog" aria-labelledby="NewUser"
+            <div class="modal fade" id="ModalNewUser" tabindex="-1" role="dialog" aria-labelledby="NewUser"
                 aria-hidden="true">
                 <div class="modal-dialog cascading-modal" role="document">
                     <div class="modal-content">
@@ -320,23 +349,31 @@
                             <ul class="nav nav-tabs md-tabs tabs-2 btn-cyan darken-3 gradient-card-header blue-gradient"
                                 role="tablist">
                                 <li class="nav-item waves-effect waves-light">
-                                    <a class="nav-link modal-clear-tab" data-toggle="tab" href="#NewUserTabPlayer" :class="new_user_data.type=='jugador'?'active':''"
-                                        id="NewUserTabPlayerPanel" role="tab" @click="new_user_data.type='jugador'"><i class="fas fa-user-plus mr-1"></i>
+                                    <a class="nav-link modal-clear-tab" data-toggle="tab" href="#NewUserTabPlayer"
+                                        :class="new_user_data.type == 'jugador' ? 'active' : ''"
+                                        id="NewUserTabPlayerPanel" role="tab" @click="new_user_data.type = 'jugador'"><i
+                                            class="fas fa-user-plus mr-1"></i>
                                         Jugador</a>
                                 </li>
-                                <li v-if="skins.register_fields.root == state.id || skins.register_fields.root1 == state.id" class="nav-item waves-effect waves-light">
-                                    <a class="nav-link" data-toggle="tab" href="#NewUserTabAffiliate" :class="new_user_data.type=='agente'?'active':''"
-                                        id="NewUserTabAffiliatePanel" role="tab" @click="new_user_data.type='agente'"><i class="fas fa-user-plus mr-1"></i>
+                                <li v-if="skins.register_fields.root == state.id || skins.register_fields.root1 == state.id"
+                                    class="nav-item waves-effect waves-light">
+                                    <a class="nav-link" data-toggle="tab" href="#NewUserTabAffiliate"
+                                        :class="new_user_data.type == 'agente' ? 'active' : ''"
+                                        id="NewUserTabAffiliatePanel" role="tab"
+                                        @click="new_user_data.type = 'agente'"><i class="fas fa-user-plus mr-1"></i>
                                         Agente</a>
                                 </li>
                             </ul>
-                            <div v-if="new_user_data.error!=''" class="text-center">
+                            <div v-if="new_user_data.error != ''" class="text-center">
                                 <span style="color:red">{{ new_user_data.error }}</span>
                             </div>
                             <div class="tab-content">
                                 <!-- CREAR JUGADOR -->
-                                <div class="tab-pane fade in" :class="new_user_data.type=='jugador'?'show active':''" id="NewUserTabPlayer" role="tabpanel">
-                                    <div style="max-height:65vh;overflow-y:scroll;overflow-x:hidden" class="modal-body mx-1 px-1">
+                                <div class="tab-pane fade in"
+                                    :class="new_user_data.type == 'jugador' ? 'show active' : ''" id="NewUserTabPlayer"
+                                    role="tabpanel">
+                                    <div style="max-height:65vh;overflow-y:scroll;overflow-x:hidden"
+                                        class="modal-body mx-1 px-1">
                                         <ul class="nav md-pills pills-danger">
                                             <li class="nav-item">
                                                 <a class="nav-link modal-clear-tab active" data-toggle="tab"
@@ -360,18 +397,22 @@
                                                     <i class="fas fa-user prefix grey-text"></i>
                                                     <input type="text" id="NewUserPlayerUsername"
                                                         class="form-control new-player-input modal-clear-val"
-                                                        autocomplete="off" maxlength="16" v-model="new_user_data.username">
+                                                        autocomplete="off" maxlength="16"
+                                                        v-model="new_user_data.username">
                                                     <label for="NewUserPlayerUsername">Nombre de Usuario</label>
                                                     <small id="NewUserPlayerUsernameFormat"
-                                                        class="form-text modal-clear-hide text-muted">El nombre de usuario
+                                                        class="form-text modal-clear-hide text-muted">El nombre de
+                                                        usuario
                                                         debe contener entre 4 y 16 caracteres.</small>
                                                 </div>
                                                 <div class="md-form mb-5 font-size-custom">
-                                                    <i class="fas fa-eye prefix password-reveal grey-text" id="iconPassNew1"
-                                                        data-user-type="Player" @click="showHidePassword('NewUserPlayerPassword','iconPassNew1',1)"></i>
+                                                    <i class="fas fa-eye prefix password-reveal grey-text"
+                                                        id="iconPassNew1" data-user-type="Player"
+                                                        @click="showHidePassword('NewUserPlayerPassword', 'iconPassNew1', 1)"></i>
                                                     <input type="password" id="NewUserPlayerPassword"
                                                         class="form-control new-player-input password-toggle modal-clear-val"
-                                                        autocomplete="off" maxlength="16" v-model="new_user_data.password">
+                                                        autocomplete="off" maxlength="16"
+                                                        v-model="new_user_data.password">
                                                     <label for="NewUserPlayerPassword">Contraseña</label>
                                                     <small id="NewUserPlayerPasswordFormat"
                                                         class="form-text modal-clear-hide text-muted">La contraseña debe
@@ -387,7 +428,8 @@
                                                     <i class="far fa-user prefix grey-text"></i>
                                                     <input type="text" id="NewUserPlayerName"
                                                         class="form-control new-player-input modal-clear-val"
-                                                        autocomplete="off" maxlength="32" v-model="new_user_data.firstname">
+                                                        autocomplete="off" maxlength="32"
+                                                        v-model="new_user_data.firstname">
                                                     <label for="NewUserPlayerName">Nombre completo</label>
                                                 </div>
                                                 <div class="md-form mb-5 font-size-custom">
@@ -396,6 +438,13 @@
                                                         class="form-control new-player-input modal-clear-val"
                                                         autocomplete="off" maxlength="32" v-model="new_user_data.dni">
                                                     <label for="NewUserPlayerPassport">Documento</label>
+                                                </div>
+                                                <div v-if="skins.register_fields.document" class="mb-3">
+                                                    <label for="registerDocument">Sube el Documento de identidad</label>
+                                                    <input type="file" id="registerDocument" class="form-control"
+                                                        @change="handleFileUpload" accept=".pdf" required>
+                                                    <small class="form-text text-muted">Sube tu documento en formato
+                                                        PDF.</small>
                                                 </div>
                                                 <div class="md-form mb-5 font-size-custom">
                                                     <i class="far fa-envelope prefix grey-text"></i>
@@ -413,11 +462,13 @@
                                                 </div>
                                             </div>
                                             <!-- PERMISOS -->
-                                            <div class="tab-pane fade in pt-3 show" id="NewUserTabPlayer3" role="tabpanel">
+                                            <div class="tab-pane fade in pt-3 show" id="NewUserTabPlayer3"
+                                                role="tabpanel">
                                                 <div class="tab-pane fade in pt-3 show active" id="NewUserTabPlayer3"
                                                     role="tabpanel">
                                                     <div class="clear-providers" id="NewUserPlayerProviders">
-                                                        <div class="col-10 offset-1 col-sm-6 offset-sm-0 d-inline-block">
+                                                        <div
+                                                            class="col-10 offset-1 col-sm-6 offset-sm-0 d-inline-block">
                                                             <div
                                                                 class="card mb-3 font-size-custom card-category card-category-1 border-warning">
                                                                 <div
@@ -427,7 +478,8 @@
                                                                             <h6 class="card-title">Poker</h6>
                                                                         </div>
                                                                         <div class="d-inline-block float-right">
-                                                                            <div class="form-check"> <input type="checkbox"
+                                                                            <div class="form-check"> <input
+                                                                                    type="checkbox"
                                                                                     class="form-check-input custom-form-check-input"
                                                                                     id="SelectAllNewPlayer1"
                                                                                     data-cat-id="1"
@@ -437,14 +489,15 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="card-text" id="NewUserPlayerProvidersCategory1Content">
+                                                                    <div class="card-text"
+                                                                        id="NewUserPlayerProvidersCategory1Content">
                                                                         <div class="mb-3 font-size-custom">
-                                                                            <div class="form-check"><input type="checkbox"
+                                                                            <div class="form-check"><input
+                                                                                    type="checkbox"
                                                                                     v-model="new_user_data.proveedores.poker.status"
                                                                                     class="form-check-input poker-jugador"
                                                                                     id="NewUserPlayerProviderId120"
-                                                                                    data-provider-id="120"
-                                                                                    ><label
+                                                                                    data-provider-id="120"><label
                                                                                     class="form-check-label"
                                                                                     for="NewUserPlayerProviderId120">Poker</label>
                                                                             </div>
@@ -452,7 +505,8 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="card mb-3 font-size-custom card-category card-category-2 border-success">
+                                                            <div
+                                                                class="card mb-3 font-size-custom card-category card-category-2 border-success">
                                                                 <div
                                                                     class="card-body card-body-category card-body-category-2 text-success">
                                                                     <div class="col-12 px-0">
@@ -460,10 +514,11 @@
                                                                             <h6 class="card-title">Deportes</h6>
                                                                         </div>
                                                                         <div class="d-inline-block float-right">
-                                                                            <div class="form-check"> <input type="checkbox"
+                                                                            <div class="form-check"> <input
+                                                                                    type="checkbox"
                                                                                     class="form-check-input custom-form-check-input"
-                                                                                    id="SelectAllNewPlayer2" checked="true"
-                                                                                    data-cat-id="2"
+                                                                                    id="SelectAllNewPlayer2"
+                                                                                    checked="true" data-cat-id="2"
                                                                                     v-model="new_user_data.proveedores.deportes.status">
                                                                                 <label class="form-check-label"
                                                                                     for="SelectAllNewPlayer2">Todos</label>
@@ -473,7 +528,8 @@
                                                                     <div class="card-text"
                                                                         id="NewUserPlayerProvidersCategory2Content">
                                                                         <div class="mb-3 font-size-custom">
-                                                                            <div class="form-check"><input type="checkbox"
+                                                                            <div class="form-check"><input
+                                                                                    type="checkbox"
                                                                                     class="form-check-input deportes-jugador"
                                                                                     id="NewUserPlayerProviderId210"
                                                                                     data-provider-id="210"
@@ -497,9 +553,11 @@
                                                                             <h6 class="card-title">Casino</h6>
                                                                         </div>
                                                                         <div class="d-inline-block float-right">
-                                                                            <div class="form-check"> <input type="checkbox"
+                                                                            <div class="form-check"> <input
+                                                                                    type="checkbox"
                                                                                     class="form-check-input custom-form-check-input"
-                                                                                    id="SelectAllNewPlayer3" :checked="new_user_data.proveedores.casino.filter(brand=>brand.status).length == new_user_data.proveedores.casino.length ? true : false"
+                                                                                    id="SelectAllNewPlayer3"
+                                                                                    :checked="new_user_data.proveedores.casino.filter(brand => brand.status).length == new_user_data.proveedores.casino.length ? true : false"
                                                                                     data-cat-id="3"
                                                                                     @change="checkAll('casino-jugador', 'SelectAllNewPlayer3')">
                                                                                 <label class="form-check-label"
@@ -511,12 +569,12 @@
                                                                         id="NewUserPlayerProvidersCategory3Content">
                                                                         <div v-for="(brand, index) in new_user_data.proveedores.casino"
                                                                             :key="index" class="mb-3 font-size-custom">
-                                                                            <div class="form-check"><input type="checkbox"
+                                                                            <div class="form-check"><input
+                                                                                    type="checkbox"
                                                                                     class="form-check-input casino-jugador"
                                                                                     :id="'NewUserPlayerProviderId' + index"
                                                                                     data-provider-id="303"
-                                                                                    v-model="new_user_data.proveedores.casino[index].status"
-                                                                                    ><label
+                                                                                    v-model="new_user_data.proveedores.casino[index].status"><label
                                                                                     class="form-check-label"
                                                                                     :for="'NewUserPlayerProviderId' + index">{{
                                                                                         brand.id }}</label></div>
@@ -530,19 +588,23 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div v-if="new_user_data.error!=''" class="font-size-custom modal-clear-hide font-size-custom text-center pb-4">
+                                    <div v-if="new_user_data.error != ''"
+                                        class="font-size-custom modal-clear-hide font-size-custom text-center pb-4">
                                         <span style="color:red">{{ new_user_data.error }}</span>
                                     </div>
                                     <div class="modal-footer d-flex justify-content-center py-2">
                                         <button type="button" class="btn btn-outline-cyan px-4 waves-effect waves-light"
                                             data-dismiss="modal" @click="closeModal">Cancelar</button>
-                                        <button type="button" class="btn btn-cyan px-4 waves-effect waves-light" @click="create_user"
-                                            id="ModalNewUserPlayerSubmit" data-loading="<i class='fa fa-spinner fa-spin '></i> Creando...">Aceptar</button>
+                                        <button type="button" class="btn btn-cyan px-4 waves-effect waves-light"
+                                            @click="create_user" id="ModalNewUserPlayerSubmit"
+                                            data-loading="<i class='fa fa-spinner fa-spin '></i> Creando...">Aceptar</button>
                                     </div>
                                 </div>
                                 <!-- CREAR AGENTE -->
-                                <div class="tab-pane fade" :class="new_user_data.type=='agente'?'show active':''" id="NewUserTabAffiliate" role="tabpanel">
-                                    <div style="max-height:65vh;overflow-y:scroll;overflow-x:hidden" class="modal-body mx-1 px-1">
+                                <div class="tab-pane fade" :class="new_user_data.type == 'agente' ? 'show active' : ''"
+                                    id="NewUserTabAffiliate" role="tabpanel">
+                                    <div style="max-height:65vh;overflow-y:scroll;overflow-x:hidden"
+                                        class="modal-body mx-1 px-1">
                                         <ul class="nav md-pills pills-danger pills-affiliate">
                                             <li class="nav-item">
                                                 <a class="nav-link modal-clear-tab agenteItem active" data-toggle="tab"
@@ -550,16 +612,19 @@
                                                     role="tab">Ingreso</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link agenteItem" data-toggle="tab" id="NewUserTabAffiliate2Link"
-                                                    href="#NewUserTabAffiliate2" role="tab">Datos personales</a>
+                                                <a class="nav-link agenteItem" data-toggle="tab"
+                                                    id="NewUserTabAffiliate2Link" href="#NewUserTabAffiliate2"
+                                                    role="tab">Datos personales</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link agenteItem" data-toggle="tab" id="NewUserTabAffiliate3Link"
-                                                    href="#NewUserTabAffiliate3" role="tab">Permisos</a>
+                                                <a class="nav-link agenteItem" data-toggle="tab"
+                                                    id="NewUserTabAffiliate3Link" href="#NewUserTabAffiliate3"
+                                                    role="tab">Permisos</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link agenteItem" data-toggle="tab" id="NewUserTabAffiliate4Link"
-                                                    href="#NewUserTabAffiliate4" role="tab">Comisiones</a>
+                                                <a class="nav-link agenteItem" data-toggle="tab"
+                                                    id="NewUserTabAffiliate4Link" href="#NewUserTabAffiliate4"
+                                                    role="tab">Comisiones</a>
                                             </li>
                                         </ul>
                                         <div class="tab-content">
@@ -570,18 +635,22 @@
                                                     <i class="fas fa-user prefix grey-text"></i>
                                                     <input type="text" id="NewUserAffiliateUsername"
                                                         class="form-control new-affiliate-input modal-clear-val"
-                                                        autocomplete="off" maxlength="16" v-model="new_user_data.username">
+                                                        autocomplete="off" maxlength="16"
+                                                        v-model="new_user_data.username">
                                                     <label for="NewUserAffiliateUsername">Nombre de Usuario</label>
                                                     <small id="NewUserAffiliateUsernameFormat"
-                                                        class="form-text modal-clear-hide text-muted">El nombre de usuario
+                                                        class="form-text modal-clear-hide text-muted">El nombre de
+                                                        usuario
                                                         debe contener entre 4 y 16 caracteres.</small>
                                                 </div>
                                                 <div class="md-form mb-5 font-size-custom">
-                                                    <i class="fas fa-eye prefix password-reveal grey-text" id="iconPassNew2"
-                                                        data-user-type="Affiliate" @click="showHidePassword('NewUserAffiliatePassword','iconPassNew2',2)"></i>
+                                                    <i class="fas fa-eye prefix password-reveal grey-text"
+                                                        id="iconPassNew2" data-user-type="Affiliate"
+                                                        @click="showHidePassword('NewUserAffiliatePassword', 'iconPassNew2', 2)"></i>
                                                     <input type="password" id="NewUserAffiliatePassword"
                                                         class="form-control new-affiliate-input password-toggle modal-clear-val"
-                                                        autocomplete="off" maxlength="16" v-model="new_user_data.password">
+                                                        autocomplete="off" maxlength="16"
+                                                        v-model="new_user_data.password">
                                                     <label for="NewUserAffiliatePassword">Contraseña</label>
                                                     <small id="NewUserAffiliatePasswordFormat"
                                                         class="form-text modal-clear-hide text-muted">La contraseña debe
@@ -589,13 +658,14 @@
                                                 </div>
                                             </div>
                                             <!-- DATOS PERSONALES -->
-                                            <div class="tab-pane agenteTab fade in show col-10 mx-auto pb-4" id="NewUserTabAffiliate2"
-                                                role="tabpanel">
+                                            <div class="tab-pane agenteTab fade in show col-10 mx-auto pb-4"
+                                                id="NewUserTabAffiliate2" role="tabpanel">
                                                 <div class="md-form mb-5 font-size-custom">
                                                     <i class="far fa-user prefix grey-text"></i>
                                                     <input type="text" id="NewUserAffiliateName"
                                                         class="form-control new-affiliate-input modal-clear-val"
-                                                        autocomplete="off" maxlength="32" v-model="new_user_data.firstname">
+                                                        autocomplete="off" maxlength="32"
+                                                        v-model="new_user_data.firstname">
                                                     <label for="NewUserAffiliateName">Nombre completo</label>
                                                 </div>
                                                 <div class="md-form mb-5 font-size-custom">
@@ -621,8 +691,8 @@
                                                 </div>
                                             </div>
                                             <!-- PERMISOS -->
-                                            <div class="tab-pane agenteTab fade in show pt-2 pt-sm-4" id="NewUserTabAffiliate3"
-                                                role="tabpanel">
+                                            <div class="tab-pane agenteTab fade in show pt-2 pt-sm-4"
+                                                id="NewUserTabAffiliate3" role="tabpanel">
                                                 <div class="clear-providers" id="NewUserAffiliateProviders">
                                                     <div class="col-10 offset-1 col-sm-6 offset-sm-0 d-inline-block">
                                                         <div
@@ -637,7 +707,8 @@
                                                                         <div class="form-check"> <input type="checkbox"
                                                                                 class="form-check-input custom-form-check-input"
                                                                                 id="SelectAllNewAffiliate1"
-                                                                                data-cat-id="1" v-model="new_user_data.proveedores.poker.status"><label
+                                                                                data-cat-id="1"
+                                                                                v-model="new_user_data.proveedores.poker.status"><label
                                                                                 class="form-check-label"
                                                                                 for="SelectAllNewAffiliate1">Todos</label>
                                                                         </div>
@@ -647,7 +718,7 @@
                                                                     id="NewUserAffiliateProvidersCategory1Content">
                                                                     <div class="mb-3 font-size-custom">
                                                                         <div class="form-check"><input type="checkbox"
-                                                                            v-model="new_user_data.proveedores.poker.status"
+                                                                                v-model="new_user_data.proveedores.poker.status"
                                                                                 class="form-check-input poker-agente"
                                                                                 id="NewUserAffiliateProviderId120"
                                                                                 data-provider-id="120"><label
@@ -670,8 +741,9 @@
                                                                         <div class="form-check"> <input type="checkbox"
                                                                                 class="form-check-input custom-form-check-input"
                                                                                 id="SelectAllNewAffiliate2"
-                                                                                data-cat-id="2" v-model="new_user_data.proveedores.deportes.status"> <label
-                                                                                class="form-check-label"
+                                                                                data-cat-id="2"
+                                                                                v-model="new_user_data.proveedores.deportes.status">
+                                                                            <label class="form-check-label"
                                                                                 for="SelectAllNewAffiliate2">Todos</label>
                                                                         </div>
                                                                     </div>
@@ -680,7 +752,7 @@
                                                                     id="NewUserAffiliateProvidersCategory2Content">
                                                                     <div class="mb-3 font-size-custom">
                                                                         <div class="form-check"><input type="checkbox"
-                                                                            v-model="new_user_data.proveedores.deportes.status"
+                                                                                v-model="new_user_data.proveedores.deportes.status"
                                                                                 class="form-check-input deportes-agente"
                                                                                 id="NewUserAffiliateProviderId210"
                                                                                 data-provider-id="210"><label
@@ -705,29 +777,35 @@
                                                                     <div class="d-inline-block float-right">
                                                                         <div class="form-check"> <input type="checkbox"
                                                                                 class="form-check-input custom-form-check-input"
-                                                                                id="SelectAllNewAffiliate3" :checked="new_user_data.proveedores.casino.filter(brand=>brand.status).length == new_user_data.proveedores.casino.length ? true : false"
-                                                                                data-cat-id="3" @click="checkAll('casino-agente', 'SelectAllNewAffiliate3')"> <label
-                                                                                class="form-check-label"
+                                                                                id="SelectAllNewAffiliate3"
+                                                                                :checked="new_user_data.proveedores.casino.filter(brand => brand.status).length == new_user_data.proveedores.casino.length ? true : false"
+                                                                                data-cat-id="3"
+                                                                                @click="checkAll('casino-agente', 'SelectAllNewAffiliate3')">
+                                                                            <label class="form-check-label"
                                                                                 for="SelectAllNewAffiliate3">Todos</label>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="card-text"
                                                                     id="NewUserAffiliateProvidersCategory3Content">
-                                                                    <div class="mb-3 font-size-custom" v-for="(brand, index) in new_user_data.proveedores.casino" :key="index">
+                                                                    <div class="mb-3 font-size-custom"
+                                                                        v-for="(brand, index) in new_user_data.proveedores.casino"
+                                                                        :key="index">
                                                                         <div class="form-check"><input type="checkbox"
                                                                                 v-model="new_user_data.proveedores.casino[index].status"
                                                                                 class="form-check-input casino-agente"
-                                                                                :id="'NewUserAffiliateProviderId'+index"
-                                                                                data-provider-id="303" checked="true"><label
+                                                                                :id="'NewUserAffiliateProviderId' + index"
+                                                                                data-provider-id="303"
+                                                                                checked="true"><label
                                                                                 class="form-check-label"
-                                                                                :for="'NewUserAffiliateProviderId'+index">{{ brand.id }}</label></div>
+                                                                                :for="'NewUserAffiliateProviderId' + index">{{
+                                                                                    brand.id }}</label></div>
                                                                     </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
                                             </div>
                                             <!-- COMISIONES -->
                                             <div class="tab-pane agenteTab fade in show pt-2" id="NewUserTabAffiliate4"
@@ -735,11 +813,11 @@
                                                 <div class="row pb-1">
                                                     <div class="col-6 offset-3 col-md-4 offset-md-4">
                                                         <section class="section-preview">
-                                                            <div class="" style="font-size: small;min-width: 200px;">Liquidar automaticamente</div>
+                                                            <div class="" style="font-size: small;min-width: 200px;">
+                                                                Liquidar automaticamente</div>
                                                             <div class="select-wrapper mdb-select col-12">
                                                                 <span class="caret">▼</span>
-                                                                <input type="text"
-                                                                    class="select-dropdown w-100 active"
+                                                                <input type="text" class="select-dropdown w-100 active"
                                                                     @click="showTargetOptions" readonly="true" value=""
                                                                     v-model="new_user_data.liquidacion">
                                                                 <ul id="selectTargets"
@@ -747,10 +825,12 @@
                                                                     style="width: 82.125px; position: absolute; top: -73.391px; left: 15px; opacity: 1; 
                                                                     display: none;">
                                                                     <li @click="setLiquidacion('Mensual')">
-                                                                        <span :style="new_user_data.liquidacion=='Mensual'?'background-color:#4285f4;color:white !important;':''">Mensual</span>
+                                                                        <span
+                                                                            :style="new_user_data.liquidacion == 'Mensual' ? 'background-color:#4285f4;color:white !important;' : ''">Mensual</span>
                                                                     </li>
                                                                     <li @click="setLiquidacion('Semanal')">
-                                                                        <span :style="new_user_data.liquidacion=='Semanal'?'background-color:#4285f4;color:white !important;':''">Semanal</span>
+                                                                        <span
+                                                                            :style="new_user_data.liquidacion == 'Semanal' ? 'background-color:#4285f4;color:white !important;' : ''">Semanal</span>
                                                                     </li>
                                                                 </ul>
                                                             </div>
@@ -759,158 +839,222 @@
                                                 </div>
                                                 <div class="clear-providers" id="NewUserAffiliateCommissions">
                                                     <div class="col-10 offset-1 col-sm-6 offset-sm-0 d-inline-block">
-                                                        <div class="card mb-3 font-size-custom card-category card-category-1 border-warning"> 
-                                                            <div class="card-body card-body-category card-body-category-1 text-warning">  
-                                                                <div class="col-12 px-0">   <div class="d-inline-block">    
-                                                                    <h6 class="card-title">Poker</h6>   
-                                                                </div>   
-                                                                <div class="d-inline-block float-right">    
-                                                                    <div class="form-check">
-                                                                        <div class="md-form input-group font-size-custom">
-                                                                            <input v-model="new_user_data.proveedores.pokerTotal" @input="setPokerComision('create')" type="text" class="form-control modal-clear-val text-right percent-format select-all-commissions" cat-id="1" id="SelectAllCommissions1" autocomplete="off" value="">
-                                                                            <label for="SelectAllCommissions1" aria-describedby="material-addonall">Todos</label>
-                                                                            </div>    
-                                                                        </div>   
-                                                                    </div>  
-                                                                </div>  
-                                                                <div class="card-text" id="NewUserAffiliateCommissionsCategory1Content">
-                                                                    <div class="col-10 offset-1 md-form input-group mb-5 font-size-custom">
-                                                                        <input readonly type="text" class="form-control new-affiliate-input modal-clear-val percent-format text-right" id="NewUserAffiliateCommissionId120" autocomplete="off" v-model="new_user_data.proveedores.poker.comision">
-                                                                        <label for="NewUserAffiliateCommissionId120" aria-describedby="material-addon120">Poker</label>
+                                                        <div
+                                                            class="card mb-3 font-size-custom card-category card-category-1 border-warning">
+                                                            <div
+                                                                class="card-body card-body-category card-body-category-1 text-warning">
+                                                                <div class="col-12 px-0">
+                                                                    <div class="d-inline-block">
+                                                                        <h6 class="card-title">Poker</h6>
                                                                     </div>
-                                                                </div> 
-                                                            </div>
-                                                        </div>
-                                                        <div class="card mb-3 font-size-custom card-category card-category-2 border-success"> 
-                                                            <div class="card-body card-body-category card-body-category-2 text-success">  
-                                                                <div class="col-12 px-0">   <div class="d-inline-block">    
-                                                                    <h6 class="card-title">Deportes</h6>   
-                                                                </div>   
-                                                                <div class="d-inline-block float-right">    
-                                                                    <div class="form-check">
-                                                                        <div class="md-form input-group font-size-custom">
-                                                                            <input v-model="new_user_data.proveedores.deportesTotal" @input="setDeportesComision('create')" type="text" class="form-control modal-clear-val text-right percent-format select-all-commissions" cat-id="2" id="SelectAllCommissions2" autocomplete="off" value="">
-                                                                            <label for="SelectAllCommissions2" aria-describedby="material-addonall">Todos</label>
-                                                                        </div>    
-                                                                    </div>   
-                                                                </div>  
-                                                            </div>  
-                                                            <div class="card-text" id="NewUserAffiliateCommissionsCategory2Content">
-                                                                <div class="col-10 offset-1 md-form input-group mb-5 font-size-custom">
-                                                                    <input readonly type="text" class="form-control new-affiliate-input modal-clear-val percent-format text-right" id="NewUserAffiliateCommissionId210" autocomplete="off" v-model="new_user_data.proveedores.deportes.comision">
-                                                                    <label for="NewUserAffiliateCommissionId210" aria-describedby="material-addon210">Deportes</label>
+                                                                    <div class="d-inline-block float-right">
+                                                                        <div class="form-check">
+                                                                            <div
+                                                                                class="md-form input-group font-size-custom">
+                                                                                <input
+                                                                                    v-model="new_user_data.proveedores.pokerTotal"
+                                                                                    @input="setPokerComision('create')"
+                                                                                    type="text"
+                                                                                    class="form-control modal-clear-val text-right percent-format select-all-commissions"
+                                                                                    cat-id="1"
+                                                                                    id="SelectAllCommissions1"
+                                                                                    autocomplete="off" value="">
+                                                                                <label for="SelectAllCommissions1"
+                                                                                    aria-describedby="material-addonall">Todos</label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                            </div> 
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-10 offset-1 col-sm-6 offset-sm-0 d-inline-block align-top">
-                                                    <div class="card mb-3 font-size-custom card-category card-category-3 border-primary"> 
-                                                        <div class="card-body card-body-category card-body-category-3 text-primary">  
-                                                            <div class="col-12 px-0">   
-                                                                <div class="d-inline-block">    
-                                                                    <h6 class="card-title">Casino</h6>   
-                                                                </div>   
-                                                                <div class="d-inline-block float-right">    
-                                                                    <div class="form-check">
-                                                                        <div class="md-form input-group font-size-custom">
-                                                                            <input v-model="new_user_data.proveedores.casinoTotal" @input="setCasinoComision('create')" type="text" class="form-control modal-clear-val text-right percent-format select-all-commissions" cat-id="3" id="SelectAllCommissions3" autocomplete="off" value="">
-                                                                            <label for="SelectAllCommissions3" aria-describedby="material-addonall">Todos</label>
-                                                                        </div>    
-                                                                    </div>   
-                                                                </div>  
-                                                            </div>  
-                                                            <div class="card-text" id="NewUserAffiliateCommissionsCategory3Content">
-                                                                <div class="col-10 offset-1 md-form input-group mb-5 font-size-custom" v-for="(brand, index) in new_user_data.proveedores.casino" :key="index">
-                                                                    <input readonly v-model="new_user_data.proveedores.casino[index].comision" type="text" class="form-control new-affiliate-input modal-clear-val percent-format text-right" :id="'NewUserAffiliateCommissionId'+index" autocomplete="off">
-                                                                    <label :for="'NewUserAffiliateCommissionId'+index" aria-describedby="material-addon303">{{ brand.id }}</label>
+                                                                <div class="card-text"
+                                                                    id="NewUserAffiliateCommissionsCategory1Content">
+                                                                    <div
+                                                                        class="col-10 offset-1 md-form input-group mb-5 font-size-custom">
+                                                                        <input readonly type="text"
+                                                                            class="form-control new-affiliate-input modal-clear-val percent-format text-right"
+                                                                            id="NewUserAffiliateCommissionId120"
+                                                                            autocomplete="off"
+                                                                            v-model="new_user_data.proveedores.poker.comision">
+                                                                        <label for="NewUserAffiliateCommissionId120"
+                                                                            aria-describedby="material-addon120">Poker</label>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <div
+                                                            class="card mb-3 font-size-custom card-category card-category-2 border-success">
+                                                            <div
+                                                                class="card-body card-body-category card-body-category-2 text-success">
+                                                                <div class="col-12 px-0">
+                                                                    <div class="d-inline-block">
+                                                                        <h6 class="card-title">Deportes</h6>
+                                                                    </div>
+                                                                    <div class="d-inline-block float-right">
+                                                                        <div class="form-check">
+                                                                            <div
+                                                                                class="md-form input-group font-size-custom">
+                                                                                <input
+                                                                                    v-model="new_user_data.proveedores.deportesTotal"
+                                                                                    @input="setDeportesComision('create')"
+                                                                                    type="text"
+                                                                                    class="form-control modal-clear-val text-right percent-format select-all-commissions"
+                                                                                    cat-id="2"
+                                                                                    id="SelectAllCommissions2"
+                                                                                    autocomplete="off" value="">
+                                                                                <label for="SelectAllCommissions2"
+                                                                                    aria-describedby="material-addonall">Todos</label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card-text"
+                                                                    id="NewUserAffiliateCommissionsCategory2Content">
+                                                                    <div
+                                                                        class="col-10 offset-1 md-form input-group mb-5 font-size-custom">
+                                                                        <input readonly type="text"
+                                                                            class="form-control new-affiliate-input modal-clear-val percent-format text-right"
+                                                                            id="NewUserAffiliateCommissionId210"
+                                                                            autocomplete="off"
+                                                                            v-model="new_user_data.proveedores.deportes.comision">
+                                                                        <label for="NewUserAffiliateCommissionId210"
+                                                                            aria-describedby="material-addon210">Deportes</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="col-10 offset-1 col-sm-6 offset-sm-0 d-inline-block align-top">
+                                                        <div
+                                                            class="card mb-3 font-size-custom card-category card-category-3 border-primary">
+                                                            <div
+                                                                class="card-body card-body-category card-body-category-3 text-primary">
+                                                                <div class="col-12 px-0">
+                                                                    <div class="d-inline-block">
+                                                                        <h6 class="card-title">Casino</h6>
+                                                                    </div>
+                                                                    <div class="d-inline-block float-right">
+                                                                        <div class="form-check">
+                                                                            <div
+                                                                                class="md-form input-group font-size-custom">
+                                                                                <input
+                                                                                    v-model="new_user_data.proveedores.casinoTotal"
+                                                                                    @input="setCasinoComision('create')"
+                                                                                    type="text"
+                                                                                    class="form-control modal-clear-val text-right percent-format select-all-commissions"
+                                                                                    cat-id="3"
+                                                                                    id="SelectAllCommissions3"
+                                                                                    autocomplete="off" value="">
+                                                                                <label for="SelectAllCommissions3"
+                                                                                    aria-describedby="material-addonall">Todos</label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card-text"
+                                                                    id="NewUserAffiliateCommissionsCategory3Content">
+                                                                    <div class="col-10 offset-1 md-form input-group mb-5 font-size-custom"
+                                                                        v-for="(brand, index) in new_user_data.proveedores.casino"
+                                                                        :key="index">
+                                                                        <input readonly
+                                                                            v-model="new_user_data.proveedores.casino[index].comision"
+                                                                            type="text"
+                                                                            class="form-control new-affiliate-input modal-clear-val percent-format text-right"
+                                                                            :id="'NewUserAffiliateCommissionId' + index"
+                                                                            autocomplete="off">
+                                                                        <label
+                                                                            :for="'NewUserAffiliateCommissionId' + index"
+                                                                            aria-describedby="material-addon303">{{
+                                                                                brand.id }}</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
                                             </div>
                                         </div>
                                     </div>
-                                <div class="modal-footer d-flex justify-content-center py-2">
-                                    <button type="button" class="btn btn-outline-cyan px-4 waves-effect waves-light"
-                                        data-dismiss="modal" @click="closeModal">Cancelar</button>
-                                    <button type="button" class="btn btn-cyan px-4 waves-effect waves-light" @click="create_user"
-                                        id="ModalNewUserAffiliateSubmit" data-loading="<i class='fa fa-spinner fa-spin '></i> Creando...">Aceptar</button>
+                                    <div class="modal-footer d-flex justify-content-center py-2">
+                                        <button type="button" class="btn btn-outline-cyan px-4 waves-effect waves-light"
+                                            data-dismiss="modal" @click="closeModal">Cancelar</button>
+                                        <button type="button" class="btn btn-cyan px-4 waves-effect waves-light"
+                                            @click="create_user" id="ModalNewUserAffiliateSubmit"
+                                            data-loading="<i class='fa fa-spinner fa-spin '></i> Creando...">Aceptar</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            </div>
-        <div class="modal fade" id="ModalPreventDeleteConfirm" tabindex="-1" role="dialog"
-            aria-labelledby="PreventDeleteConfirm" aria-modal="true">
-            <div class="modal-dialog modal-sm cascading-modal modal-notify modal-warning" role="document">
-                <div class="modal-content">
-                    <div class="modal-header text-center gradient-card-header blue-gradient">
-                        <h6 class="modal-title w-100 font-weight-bold text-left ml-2">Conservar usuario</h6>
-                    </div>
-                    <div class="modal-body">
-                        <div class="md-form font-size-custom pt-1">
-                            ¿Desea evitar que el usuario sea eliminado?
-                            <input type="hidden" id="PreventDeleteConfirmId" class="modal-clear-val">
-                            <input type="hidden" id="PreventDeleteConfirmRole" class="modal-clear-val">
+            <div class="modal fade" id="ModalPreventDeleteConfirm" tabindex="-1" role="dialog"
+                aria-labelledby="PreventDeleteConfirm" aria-modal="true">
+                <div class="modal-dialog modal-sm cascading-modal modal-notify modal-warning" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header text-center gradient-card-header blue-gradient">
+                            <h6 class="modal-title w-100 font-weight-bold text-left ml-2">Conservar usuario</h6>
                         </div>
-                    </div>
-                    <div class="modal-footer justify-content-center">
-                        <button type="button" class="btn btn-sm btn-outline-cyan waves-effect"
-                            data-dismiss="modal">No</button>
-                        <button type="button" class="btn btn-sm btn-cyan waves-effect waves-light"
-                            id="ModalPreventDeleteConfirmSubmit">Si</button>
+                        <div class="modal-body">
+                            <div class="md-form font-size-custom pt-1">
+                                ¿Desea evitar que el usuario sea eliminado?
+                                <input type="hidden" id="PreventDeleteConfirmId" class="modal-clear-val">
+                                <input type="hidden" id="PreventDeleteConfirmRole" class="modal-clear-val">
+                            </div>
+                        </div>
+                        <div class="modal-footer justify-content-center">
+                            <button type="button" class="btn btn-sm btn-outline-cyan waves-effect"
+                                data-dismiss="modal">No</button>
+                            <button type="button" class="btn btn-sm btn-cyan waves-effect waves-light"
+                                id="ModalPreventDeleteConfirmSubmit">Si</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
 
-    </main>
-</div>
+        </main>
+    </div>
 </template>
 <script>
 /* eslint-disable */
 import axios from 'axios';
 export default {
     name: 'statsComponent',
-    props:["view_type"],
+    props: ["view_type"],
     data() {
         return {
-            target_user_id:"",
-            search:"",
-            new_user_data:{
-                type:"",
+            target_user_id: "",
+            search: "",
+            new_user_data: {
+                document: null,
+                type: "",
                 username: "",
                 email: "",
                 firstname: "",
-                dni:"",
+                dni: "",
                 password: "",
                 phone: "",
                 login_Id: 0,
                 poker: 0,
                 casino: 0,
                 deportes: 0,
-                proveedores:{poker:{status:true,comision:"0%"},casino:[],deportes:{status:true,comision:"0%"},bingo:{status:true,comision:"0%"},
-                    casinoTotal:"",pokerTotal:"",deportesTotal:"",bingoTotal:""
+                proveedores: {
+                    poker: { status: true, comision: "0%" }, casino: [], deportes: { status: true, comision: "0%" }, bingo: { status: true, comision: "0%" },
+                    casinoTotal: "", pokerTotal: "", deportesTotal: "", bingoTotal: ""
                 },
-                error:"",
-                liquidacion:"Mensual"
+                error: "",
+                liquidacion: "Mensual"
             },
-            credit_modal:{
-                action:"",
-                value:"0,00",
-                username:"",
-                balance:0,
-                role:"",
-                id:0,
-                loading:false
+            credit_modal: {
+                action: "",
+                value: "0,00",
+                username: "",
+                balance: 0,
+                role: "",
+                id: 0,
+                loading: false
             },
-            render:0
+            render: 0
         }
     },
     components: {
@@ -922,34 +1066,34 @@ export default {
         skins() {
             return this.$store.state.skins;
         },
-        apiUrl(){
+        apiUrl() {
             return this.$store.getters['getApiUrl'];
         },
-        site(){
+        site() {
             return this.$store.getters['getSite'];
         },
-        all_casino_brands(){
-            return this.$store.getters["getAllCasinoBrands"]; 
+        all_casino_brands() {
+            return this.$store.getters["getAllCasinoBrands"];
         },
-        casino_brands(){
+        casino_brands() {
             return this.$store.getters["getCasinoBrands"];
         },
-        userInfo(){
+        userInfo() {
             return this.$store.getters["getUserData"];
         },
-        apiUrlnew(){
+        apiUrlnew() {
             return this.$store.getters['getApiUrlnew'];
         },
-        chartDataNetwinTotal(){
+        chartDataNetwinTotal() {
             return this.$store.getters["getChartDataNetwinTotal"];
         },
-        chartDataNetwinMonth(){
+        chartDataNetwinMonth() {
             return this.$store.getters["getChartDataNetwinMonth"];
         },
-        chartDataNetwinDay(){
+        chartDataNetwinDay() {
             return this.$store.getters["getChartDataNetwinDay"];
         },
-        chartDataTopAgentes(){
+        chartDataTopAgentes() {
             return this.$store.getters["getChartTopAgentes"];
         },
         main_tree() {
@@ -957,11 +1101,11 @@ export default {
         },
         users_capital() {
             let MainData = this.$store.getters["getUsersCapital"];
-            let data = MainData.sort(function(a,b){
-                if(a.role=="ROLE_PROMOTOR"){
+            let data = MainData.sort(function (a, b) {
+                if (a.role == "ROLE_PROMOTOR") {
                     return -1
                 }
-                if(b.role=="ROLE_APOSTADOR"){
+                if (b.role == "ROLE_APOSTADOR") {
                     return 1
                 }
                 return 0
@@ -973,158 +1117,161 @@ export default {
         },
     },
     methods: {
-        setLiquidacion(type){
+        handleFileUpload(event) {
+            this.new_user_data.document = event.target.files[0]; // Captura el archivo seleccionado
+        },
+        setLiquidacion(type) {
             this.new_user_data.liquidacion = type;
             document.getElementById("selectTargets").style.display = "none";
         },
         showTargetOptions() {
             document.getElementById("selectTargets").style.display = "block";
         },
-        loadCharts(){
+        loadCharts() {
             const ctx = document.getElementById('netwinChart');
             new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels:this.chartDataNetwinMonth.casino.map(item=>item.month),
+                    labels: this.chartDataNetwinMonth.casino.map(item => item.month),
                     datasets: [{
                         label: '',
-                        data: this.chartDataNetwinMonth.casino.map(item=>item.netwin),
+                        data: this.chartDataNetwinMonth.casino.map(item => item.netwin),
                         fill: true,
                         borderColor: 'rgba(93, 173, 226, 1)',
-                        backgroundColor:"rgba(93, 173, 226, 0.3)",
-                        borderWidth:1,
+                        backgroundColor: "rgba(93, 173, 226, 0.3)",
+                        borderWidth: 1,
                         tension: 0.4
                     },
                     {
                         label: '',
-                        data: this.chartDataNetwinMonth.deportes.map(item=>item.netwin),
+                        data: this.chartDataNetwinMonth.deportes.map(item => item.netwin),
                         fill: true,
                         borderColor: 'rgba(175, 122, 197, 1)',
-                        borderWidth:1,
-                        backgroundColor:"rgba(232, 218, 239, 0.3)",
+                        borderWidth: 1,
+                        backgroundColor: "rgba(232, 218, 239, 0.3)",
                         tension: 0.4
                     }]
                 }
-                }
+            }
             );
             const ctx2 = document.getElementById('netwin2Chart');
             new Chart(ctx2, {
                 type: 'line',
                 data: {
-                    labels:this.chartDataNetwinDay.casino.map(item=>item.day),
+                    labels: this.chartDataNetwinDay.casino.map(item => item.day),
                     datasets: [{
                         label: '',
-                        data: this.chartDataNetwinDay.casino.map(item=>item.netwin),
+                        data: this.chartDataNetwinDay.casino.map(item => item.netwin),
                         fill: true,
                         borderColor: 'rgba(93, 173, 226, 1)',
-                        borderWidth:1,
-                        backgroundColor:"rgba(93, 173, 226, 0.3)",
+                        borderWidth: 1,
+                        backgroundColor: "rgba(93, 173, 226, 0.3)",
                         tension: 0.4
                     },
                     {
                         label: '',
-                        data: this.chartDataNetwinDay.deportes.map(item=>item.netwin),
+                        data: this.chartDataNetwinDay.deportes.map(item => item.netwin),
                         fill: true,
                         borderColor: 'rgba(175, 122, 197, 1)',
-                        borderWidth:1,
-                        backgroundColor:"rgba(232, 218, 239, 0.3)",
+                        borderWidth: 1,
+                        backgroundColor: "rgba(232, 218, 239, 0.3)",
                         tension: 0.4
                     }]
                 }
-                }
+            }
             );
             const ctx3 = document.getElementById('agentesChart');
             new Chart(ctx3, {
                 type: 'pie',
                 data: {
-                    labels: this.chartDataTopAgentes.map(item=>item.username),
+                    labels: this.chartDataTopAgentes.map(item => item.username),
                     datasets: [{
                         label: 'My First Dataset',
-                        data: this.chartDataTopAgentes.map(item=>item.valor),
+                        data: this.chartDataTopAgentes.map(item => item.valor),
                         backgroundColor: [
-                        'rgb(255, 99, 132)',
-                        'rgb(54, 162, 235)',
-                        'rgb(255, 205, 86)',
-                        'rgb(82, 190, 128 )',
-                        'rgb(175, 122, 197)',
+                            'rgb(255, 99, 132)',
+                            'rgb(54, 162, 235)',
+                            'rgb(255, 205, 86)',
+                            'rgb(82, 190, 128 )',
+                            'rgb(175, 122, 197)',
                         ],
                         hoverOffset: 4
                     }]
-                    }
                 }
+            }
             );
         },
-        parseNumbers(number,target){
-            if(Number.isNaN(number)){
+        parseNumbers(number, target) {
+            if (Number.isNaN(number)) {
                 return 0;
             }
-            if(target){
-                const actualBalance = parseFloat(this.credit_modal.balance.replaceAll('.','').replace(',','.'));
-                let element =  document.getElementById(target);
+            if (target) {
+                const actualBalance = parseFloat(this.credit_modal.balance.replaceAll('.', '').replace(',', '.'));
+                let element = document.getElementById(target);
                 let selection1 = element.selectionStart
                 let digits = element.value.includes(".") ? (element.value.split(".")[1].length < 1 ? 0 : element.value.split(".")[1].length) : 0;
                 number = element.value == "" ? 0 : this.textToFloat(element.value);
-                if (number > actualBalance && this.credit_modal.action === 'Descargar Fichas'){ number = actualBalance }
-                element.value = digits > 0 ? this.floatToText(number,digits) : ( element.value.includes(".")?this.floatToText(number,digits)+".":this.floatToText(number,digits));
-                element.setSelectionRange(element.value.includes(" ")?selection1+1:selection1, element.value.includes(" ")?selection1+1:selection1);
+                if (number > actualBalance && this.credit_modal.action === 'Descargar Fichas') { number = actualBalance }
+                element.value = digits > 0 ? this.floatToText(number, digits) : (element.value.includes(".") ? this.floatToText(number, digits) + "." : this.floatToText(number, digits));
+                element.setSelectionRange(element.value.includes(" ") ? selection1 + 1 : selection1, element.value.includes(" ") ? selection1 + 1 : selection1);
                 this.credit_modal.value = number;
                 return
             }
-            return new Intl.NumberFormat("de-DE",{minimumFractionDigits:2, maximumFractionDigits: 2}).format(number)
+            return new Intl.NumberFormat("de-DE", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(number)
         },
-        floatToText(number,digits){
-            let text1 = new Intl.NumberFormat("de-DE",{minimumFractionDigits:digits, maximumFractionDigits: digits}).format(number);
-            let parsed = text1.replaceAll("."," ").replace(",",".");
+        floatToText(number, digits) {
+            let text1 = new Intl.NumberFormat("de-DE", { minimumFractionDigits: digits, maximumFractionDigits: digits }).format(number);
+            let parsed = text1.replaceAll(".", " ").replace(",", ".");
             return parsed
         },
-        textToFloat(text){
+        textToFloat(text) {
             let dot_qty = 0;
             let parsed = "";
             for (let index = 0; index < text.length; index++) {
                 const char = text[index];
-                if(char == " "){
+                if (char == " ") {
                     dot_qty++;
                 }
             }
-            if(dot_qty>=1){
-                parsed = text.replaceAll(" ","").replace(",",".");
+            if (dot_qty >= 1) {
+                parsed = text.replaceAll(" ", "").replace(",", ".");
             }
-            else{
-                parsed = text.replace(",",".");
+            else {
+                parsed = text.replace(",", ".");
             }
             return parseFloat(parsed);
         },
-        addValue(target,val){
-            const actualBalance = parseFloat(this.credit_modal.balance.replaceAll('.','').replace(',','.'));
-            let element =  document.getElementById(target);
+        addValue(target, val) {
+            const actualBalance = parseFloat(this.credit_modal.balance.replaceAll('.', '').replace(',', '.'));
+            let element = document.getElementById(target);
             let floatNumber = this.textToFloat(element.value);
             let newVal = floatNumber + val > actualBalance && this.credit_modal.action === 'Descargar Fichas' ? actualBalance : floatNumber + val;
             element.value = this.floatToText(newVal);
-            this.parseNumbers('',target);
+            this.parseNumbers('', target);
         },
-        removeValue(target,val){
-            let element =  document.getElementById(target);
+        removeValue(target, val) {
+            let element = document.getElementById(target);
             let floatNumber = this.textToFloat(element.value);
             let newVal = floatNumber - val < 0 ? 0 : floatNumber - val;
             element.value = this.floatToText(newVal);
-            this.parseNumbers('',target);
+            this.parseNumbers('', target);
         },
-        openModal(target,id,type){
+        openModal(target, id, type) {
             try {
-                this.new_user_data.type=type;
+                this.new_user_data.type = type;
                 this.backdrop(true);
                 this.target_user_id = id;
                 let modal = document.getElementById(target);
                 modal.classList.add("show");
                 modal.style.display = "block";
-                if(target=="ModalNewUser"){
+                if (target == "ModalNewUser") {
                     let brandsCopy = JSON.parse(JSON.stringify(this.casino_brands));
-                    this.new_user_data.proveedores.casino = brandsCopy.map(brand=>{
+                    this.new_user_data.proveedores.casino = brandsCopy.map(brand => {
                         return {
-                            id:brand.id,
-                            name:brand.name,
-                            comision:"0%",
-                            status:brand.status
+                            id: brand.id,
+                            name: brand.name,
+                            comision: "0%",
+                            status: brand.status
                         }
                     });
                 }
@@ -1132,14 +1279,14 @@ export default {
                 console.log(error);
             }
         },
-        openModalCredit(target,title){
+        openModalCredit(target, title) {
             try {
-                if(this.search!="" && this.users_capital[0]){
+                if (this.search != "" && this.users_capital[0]) {
                     this.backdrop(true);
                     let modal = document.getElementById(target);
                     modal.classList.add("show");
                     modal.style.display = "block";
-                    if(title){
+                    if (title) {
                         let data = this.users_capital[0];
                         this.credit_modal.action = title;
                         this.credit_modal.username = data.username;
@@ -1148,7 +1295,7 @@ export default {
                         this.credit_modal.id = data.user;
                     }
                 }
-                
+
             } catch (error) {
                 console.log(error);
             }
@@ -1192,7 +1339,7 @@ export default {
                         });
                     }
                     if (response.data.error) {
-                        this.showAlert("alert-danger",  "Error ", (response?.data?.error=="You do not have sufficient balance for this transaction") ? ": No dispone de saldo para la transacción, te invitamos a recargar": "Error en el proceso");
+                        this.showAlert("alert-danger", "Error ", (response?.data?.error == "You do not have sufficient balance for this transaction") ? ": No dispone de saldo para la transacción, te invitamos a recargar" : "Error en el proceso");
                         this.closeModal();
                     }
                     if (response.data.status !== "success") {
@@ -1228,15 +1375,15 @@ export default {
                 document.getElementById("ModalCreditSubmit").disabled = false;
             }
         },
-        showAlert(type,title,message){
-            let alert = '<div id="mainAlert" class="alert '+type+' alert-dismissible fade show" role="alert">'+
-                '<strong id="alertTitle">'+title+'</strong> <span id="alertMessage">'+message+'</span>'+
-                '<button type="button" class="close" data-dismiss="alert" aria-label="Close">'+
-                    '<span aria-hidden="true">&times;</span>'+
-                '</button>'+
-            '</div>';
+        showAlert(type, title, message) {
+            let alert = '<div id="mainAlert" class="alert ' + type + ' alert-dismissible fade show" role="alert">' +
+                '<strong id="alertTitle">' + title + '</strong> <span id="alertMessage">' + message + '</span>' +
+                '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                '<span aria-hidden="true">&times;</span>' +
+                '</button>' +
+                '</div>';
             document.getElementById("mainAlert").innerHTML = alert;
-        },  
+        },
         closeModal() {
             let modals = document.getElementsByClassName("modal");
             [...modals].forEach(modal => {
@@ -1245,36 +1392,37 @@ export default {
             })
             document.getElementById("modalBackdrop").style.display = "none";
             document.getElementById("modalBackdrop").classList.remove("show");
-            this.new_user_data ={
-                type:"",
+            this.new_user_data = {
+                type: "",
                 username: "",
                 email: "",
                 firstname: "",
-                dni:"",
+                dni: "",
                 password: "",
                 phone: "",
                 login_Id: 0,
                 poker: 0,
                 casino: 0,
                 deportes: 0,
-                proveedores:{poker:{status:true,comision:"0%"},casino:[],deportes:{status:true,comision:"0%"},bingo:{status:true,comision:"0%"},
-                    casinoTotal:"",pokerTotal:"",deportesTotal:"",bingoTotal:""
+                proveedores: {
+                    poker: { status: true, comision: "0%" }, casino: [], deportes: { status: true, comision: "0%" }, bingo: { status: true, comision: "0%" },
+                    casinoTotal: "", pokerTotal: "", deportesTotal: "", bingoTotal: ""
                 },
-                error:"",
-                liquidacion:"Mensual"
+                error: "",
+                liquidacion: "Mensual"
             }
-            this.credit_modal={
-                action:"",
-                value:"0,00",
-                username:"",
-                balance:0,
-                role:"",
-                id:0,
-                loading:false
+            this.credit_modal = {
+                action: "",
+                value: "0,00",
+                username: "",
+                balance: 0,
+                role: "",
+                id: 0,
+                loading: false
             }
             const modalCreditInput = document.getElementById('ModalCreditAmount')
-            if(modalCreditInput){ modalCreditInput.value = '0.00' }
-            this.search=""
+            if (modalCreditInput) { modalCreditInput.value = '0.00' }
+            this.search = ""
             document.getElementById('NewUserTabAffiliate1Link').click()
             document.getElementById('NewUserTabPlayer1Link').click()
         },
@@ -1292,9 +1440,9 @@ export default {
             let createBtn = this.new_user_data.type == "agente" ? document.getElementById("ModalNewUserAffiliateSubmit") : document.getElementById("ModalNewUserPlayerSubmit");
             createBtn.innerHTML = createBtn.dataset.loading;
             createBtn.disabled = true;
-
             try {
                 let loginInfo = this.new_user_data.username != "" && this.new_user_data.password != "" ? true : false;
+
                 // let comisions = this.new_user_data.proveedores.pokerTotal == "" && this.new_user_data.proveedores.casinoTotal == "" && this.new_user_data.proveedores.deportesTotal == "" ? false : true;
 
                 if (!loginInfo) {
@@ -1302,12 +1450,13 @@ export default {
                     createBtn.innerHTML = "Aceptar";
                     createBtn.disabled = false;
                 }
-                // else if (this.new_user_data.type == "agente" && !comisions) {
-                //     document.getElementById("NewUserTabAffiliate4Link").click();
-                //     createBtn.innerHTML = "Aceptar";
-                //     createBtn.disabled = false;
-                // }
-                 else {
+                else if (this.new_user_data.type=="jugador" && this.new_user_data.document == null && this.skins.register_fields.document) {
+                    this.new_user_data.error = "Debes subir el documento de identidad";
+                    createBtn.innerHTML = "Aceptar";
+                    createBtn.disabled = false;
+                }
+                
+                else {
                     let data = {};
                     let allCasinoBrandsCopy = JSON.parse(JSON.stringify(this.all_casino_brands));
                     let parsedCasino = this.new_user_data.proveedores.casino.map(brand => {
@@ -1344,24 +1493,24 @@ export default {
                         data.tipo_cierre = this.new_user_data.liquidacion;
                         data.proveedores = {
                             "poker": {
-                                "comision":parseFloat(this.new_user_data.proveedores.poker.comision.split("%")[0])/100,
-                                "status":this.new_user_data.proveedores.poker.status
+                                "comision": parseFloat(this.new_user_data.proveedores.poker.comision.split("%")[0]) / 100,
+                                "status": this.new_user_data.proveedores.poker.status
                             },
                             "deportes": {
-                                "comision":parseFloat(this.new_user_data.proveedores.deportes.comision.split("%")[0])/100,
-                                "status":this.new_user_data.proveedores.deportes.status
+                                "comision": parseFloat(this.new_user_data.proveedores.deportes.comision.split("%")[0]) / 100,
+                                "status": this.new_user_data.proveedores.deportes.status
                             },
                             "casino": casinoBrandsConfig
                         }
                     } else {
                         data.proveedores = {
                             "poker": {
-                                "comision":0,
-                                "status":this.new_user_data.proveedores.poker.status
+                                "comision": 0,
+                                "status": this.new_user_data.proveedores.poker.status
                             },
                             "deportes": {
-                                "comision":0,
-                                "status":this.new_user_data.proveedores.deportes.status
+                                "comision": 0,
+                                "status": this.new_user_data.proveedores.deportes.status
                             },
                             "casino": parsedCasino
                         }
@@ -1370,13 +1519,23 @@ export default {
                     let endpoint = this.new_user_data.type == "agente" ? "crear_agente" : "crear_jugador";
                     let response;
                     response = await axios.post(this.apiUrlnew + endpoint, data);
-                   
+
 
                     if (response.data.error) {
                         this.new_user_data.error = response.data.error;
                         createBtn.innerHTML = "Aceptar";
                         createBtn.disabled = false;
-                    } else {
+                    }
+                    else if(this.new_user_data.type=="jugador" && this.skins.register_fields.document){
+                        const userId = response.data.userId;
+                        await this.uploadDocument(userId);
+                        this.$store.dispatch("getChildrenCapital2", this.$store.getters["getTargetUser"]);
+                        this.showAlert("alert-success", "Proceso correcto", "Usuario creado con éxito");
+                        createBtn.innerHTML = "Aceptar";
+                        createBtn.disabled = false;
+                        this.closeModal();
+                    }
+                     else {
                         this.$store.dispatch("getChildrenCapital2", this.$store.getters["getTargetUser"]);
                         this.showAlert("alert-success", "Proceso correcto", "Usuario creado con éxito");
                         createBtn.innerHTML = "Aceptar";
@@ -1391,57 +1550,78 @@ export default {
                 createBtn.disabled = false;
             }
         },
-        setCasinoComision(target){
-            if(target=="edit"){
-                let number = parseFloat(this.edit_user_data.proveedores.casinoTotal||0);
-                if(number > 100) number = 100;
-                this.edit_user_data.proveedores.casino.forEach(brand=>{
+        async uploadDocument(userId) {
+            try {
+                let formData = new FormData();
+                formData.append('document', this.new_user_data.document);
+                formData.append('userId', userId); // Agrega el ID al FormData si es necesario
+                formData.append('site', this.site);
+
+                let response = await axios.post(this.apiUrlnew + "document", formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data' // Asegúrate de enviar el tipo de contenido correcto
+                    }
+                });
+
+                if (response.data.error) {
+                    this.new_user_data.error = response.data.error;
+                }
+            } catch (error) {
+                console.error('Error uploading document:', error);
+                // Manejo de errores adicional
+            }
+        },
+        setCasinoComision(target) {
+            if (target == "edit") {
+                let number = parseFloat(this.edit_user_data.proveedores.casinoTotal || 0);
+                if (number > 100) number = 100;
+                this.edit_user_data.proveedores.casino.forEach(brand => {
                     brand.comision = number + "%"
                 })
             }
-            else{
-                let number = parseFloat(this.new_user_data.proveedores.casinoTotal||0);
-                if(number > 100) number = 100;
-                this.new_user_data.proveedores.casino.forEach(brand=>{
+            else {
+                let number = parseFloat(this.new_user_data.proveedores.casinoTotal || 0);
+                if (number > 100) number = 100;
+                this.new_user_data.proveedores.casino.forEach(brand => {
                     brand.comision = number + "%"
                 })
             }
         },
-        setPokerComision(target){
-            if(target=="edit"){
-                let number = parseFloat(this.edit_user_data.proveedores.pokerTotal||0);
-                if(number > 100) number = 100;
+        setPokerComision(target) {
+            if (target == "edit") {
+                let number = parseFloat(this.edit_user_data.proveedores.pokerTotal || 0);
+                if (number > 100) number = 100;
                 this.edit_user_data.proveedores.poker.comision = number + "%"
             }
-            else{
-                let number = parseFloat(this.new_user_data.proveedores.pokerTotal||0);
-                if(number > 100) number = 100;
+            else {
+                let number = parseFloat(this.new_user_data.proveedores.pokerTotal || 0);
+                if (number > 100) number = 100;
                 this.new_user_data.proveedores.poker.comision = number + "%"
             }
         },
-        setDeportesComision(target){
-            if(target=="edit"){
-                let number = parseFloat(this.edit_user_data.proveedores.deportesTotal||0);
-                if(number > 100) number = 100;
+        setDeportesComision(target) {
+            if (target == "edit") {
+                let number = parseFloat(this.edit_user_data.proveedores.deportesTotal || 0);
+                if (number > 100) number = 100;
                 this.edit_user_data.proveedores.deportes.comision = number + "%"
             }
-            else{
-                let number = parseFloat(this.new_user_data.proveedores.deportesTotal||0);
-                if(number > 100) number = 100;
+            else {
+                let number = parseFloat(this.new_user_data.proveedores.deportesTotal || 0);
+                if (number > 100) number = 100;
                 this.new_user_data.proveedores.deportes.comision = number + "%"
             }
         },
         checkAll(targetClass, mainTarget) {
             let type = targetClass.split("-")[0];
             let main = document.getElementById(mainTarget);
-            if(type=="poker"){
+            if (type == "poker") {
                 this.new_user_data.proveedores.poker.status = !this.new_user_data.proveedores.poker.status;
             }
-            else if(type=="deportes"){
+            else if (type == "deportes") {
                 this.new_user_data.proveedores.deportes.status = !this.new_user_data.proveedores.deportes.status;
             }
-            else if(type=="casino"){
-                this.new_user_data.proveedores.casino.forEach(brand=>{
+            else if (type == "casino") {
+                this.new_user_data.proveedores.casino.forEach(brand => {
                     brand.status = main.checked
                 })
             }
@@ -1456,5 +1636,4 @@ export default {
     }
 }
 </script>
-<style scoped>
-</style>
+<style scoped></style>
