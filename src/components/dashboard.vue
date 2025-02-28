@@ -492,8 +492,10 @@ export default {
     methods: {
         copyToClipboard() {
             const input = this.UserData.website;
-            console.log(input);
-            navigator.clipboard.writeText(input).then(() => {
+            const url = input;
+            const nuevaUrl = url.replace("apuestaaqui.club", "apuestas365.bet");
+            console.log(nuevaUrl);
+            navigator.clipboard.writeText(nuevaUrl).then(() => {
                 alert("¡Enlace copiado al portapapeles!"); // Muestra una notificación (puedes personalizar esto)
             })
                 .catch((err) => {
