@@ -1450,11 +1450,7 @@ export default {
                     createBtn.innerHTML = "Aceptar";
                     createBtn.disabled = false;
                 }
-                else if ((this.new_user_data.type=="jugador"||this.new_user_data.type=="" ) && (this.new_user_data.document == null) && this.skins.register_fields.document) {
-                    this.new_user_data.error = "Debes subir el documento de identidad";
-                    createBtn.innerHTML = "Aceptar";
-                    createBtn.disabled = false;
-                }
+                
                 else {
                     let data = {};
                     let allCasinoBrandsCopy = JSON.parse(JSON.stringify(this.all_casino_brands));
