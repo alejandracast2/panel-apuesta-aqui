@@ -492,16 +492,16 @@ export default {
     methods: {
         copyToClipboard() {
             const input = this.UserData.website;
-            const url = input;
-            const nuevaUrl = url.replace("apuestaaqui.club", "apuestas365.bet");
-            console.log(nuevaUrl);
-            navigator.clipboard.writeText(nuevaUrl).then(() => {
-                alert("¡Enlace copiado al portapapeles!"); // Muestra una notificación (puedes personalizar esto)
-            })
-                .catch((err) => {
-                    console.error("Error al copiar el enlace: ", err);
-                    alert("No se pudo copiar el enlace. Intenta nuevamente.");
-                });
+            const nuevaUrl = input.replace("apuestaaqui.club", "apuestas365.bet");
+
+            const textarea = document.createElement("textarea");
+            textarea.value = nuevaUrl;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textarea);
+
+            alert("¡Enlace copiado al portapapeles!");
         },
         logout() {
             this.$store.dispatch("logOut")
