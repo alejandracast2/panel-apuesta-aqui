@@ -372,6 +372,11 @@
                                 <div class="tab-pane fade in"
                                     :class="new_user_data.type == 'jugador' ? 'show active' : ''" id="NewUserTabPlayer"
                                     role="tabpanel">
+                                    <div style="display: flex;justify-content: center;margin-top: 20px;">
+                                        <button @click="crearJugador"
+                                            style="padding: 10px;border-radius: 6px;border: none;background: #FF3547;color: #fff;">Crear
+                                            Jugador facil</button>
+                                    </div>
                                     <div style="max-height:65vh;overflow-y:scroll;overflow-x:hidden"
                                         class="modal-body mx-1 px-1">
                                         <ul class="nav md-pills pills-danger">
@@ -598,6 +603,8 @@
                                         <button type="button" class="btn btn-cyan px-4 waves-effect waves-light"
                                             @click="create_user" id="ModalNewUserPlayerSubmit"
                                             data-loading="<i class='fa fa-spinner fa-spin '></i> Creando...">Aceptar</button>
+                                            <button data-bs-target="#infofastPlay1" data-bs-toggle="modal"
+                                            data-bs-dismiss="modal" style="display:none;" id="infofastPlay"></button>
                                     </div>
                                 </div>
                                 <!-- CREAR AGENTE -->
@@ -987,6 +994,33 @@
                     </div>
                 </div>
             </div>
+            <div class="modal fade" id="infofastPlay1" aria-hidden="true"
+                aria-labelledby="infofastPlaylabel1" tabindex="-1" data-bs-backdrop="false"
+                style="background-color:rgba(0, 0, 0, 0.5);">
+                <div class="modal-dialog cascading-modal modal-sm">
+                    <div class="modal-content" style="background: #ffffff;">
+                        <div class="d-flex justify-content-end align-items-start">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                style="background: none;color:black;" >
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="text-center p-2">
+                                <span style="font-size:64px;color:green;"><i class="fas fa-check-circle"></i></span><br>
+                                <span>Tu usuario es: {{ this.infoFastPlay.username }}</span><br>
+                                <span>Tu contraseña es: {{ this.infoFastPlay.password }}</span><br>
+                                <span>Login Url: {{ this.infoFastPlay.loginUrl }}</span>
+                                <div class="share-link-container">
+                        <button class="btn btn-primary btn-sm" @click="copyToClipboard">
+                            <i class="fas fa-copy"></i> Copiar Enlace
+                        </button>
+                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="modal fade" id="ModalPreventDeleteConfirm" tabindex="-1" role="dialog"
                 aria-labelledby="PreventDeleteConfirm" aria-modal="true">
                 <div class="modal-dialog modal-sm cascading-modal modal-notify modal-warning" role="document">
@@ -1023,6 +1057,7 @@ export default {
     props: ["view_type"],
     data() {
         return {
+            infoFastPlay: [],
             target_user_id: "",
             search: "",
             new_user_data: {
@@ -1117,6 +1152,48 @@ export default {
         },
     },
     methods: {
+        copyToClipboard() {
+  const nuevaUrl = this.infoFastPlay.loginUrl;
+
+  if (!nuevaUrl) {
+    alert("No hay URL para copiar.");
+    return;
+  }
+
+  navigator.clipboard.writeText(nuevaUrl)
+    .then(() => {
+      console.log("Enlace copiado:", nuevaUrl);
+      alert("¡Enlace copiado al portapapeles!");
+    })
+    .catch(err => {
+      console.error("Error al copiar:", err);
+      alert("No se pudo copiar el enlace.");
+    });
+},
+        crearJugador() {
+            console.log("Crear jugador facil",this.userInfo.token,this.target_user_id, this.apiUrlnew);
+            const data = {
+                loginId: this.target_user_id,
+            };
+
+            const headers = {
+                token: "qCpxTbvkZBePznR",
+            };
+
+              axios.post(this.apiUrlnew+'crear_jugador_simple', data, { headers })
+                .then(response => {
+                  console.log('Jugador creado:', response.data);
+                  if(response.data.status == "success") {
+                    this.closeModal();
+                    this.infoFastPlay = response.data;
+                    console.log(this.infoFastPlay);
+                    document.getElementById('infofastPlay').click();
+                  }
+                })
+                .catch(error => {
+                  console.error('Error al crear jugador:', error);
+                });
+        },
         handleFileUpload(event) {
             this.new_user_data.document = event.target.files[0]; // Captura el archivo seleccionado
         },
@@ -1444,13 +1521,13 @@ export default {
                 let loginInfo = this.new_user_data.username != "" && this.new_user_data.password != "" ? true : false;
 
                 // let comisions = this.new_user_data.proveedores.pokerTotal == "" && this.new_user_data.proveedores.casinoTotal == "" && this.new_user_data.proveedores.deportesTotal == "" ? false : true;
-                
+
                 if (!loginInfo) {
                     this.new_user_data.error = "Debes completar los datos de Ingreso";
                     createBtn.innerHTML = "Aceptar";
                     createBtn.disabled = false;
                 }
-                
+
                 else {
                     let data = {};
                     let allCasinoBrandsCopy = JSON.parse(JSON.stringify(this.all_casino_brands));
@@ -1521,7 +1598,7 @@ export default {
                         createBtn.innerHTML = "Aceptar";
                         createBtn.disabled = false;
                     }
-                    else if(this.new_user_data.type=="jugador" && this.skins.register_fields.document){
+                    else if (this.new_user_data.type == "jugador" && this.skins.register_fields.document) {
                         const userId = response.data.userId;
                         await this.uploadDocument(userId);
                         this.$store.dispatch("getChildrenCapital2", this.$store.getters["getTargetUser"]);
@@ -1530,7 +1607,7 @@ export default {
                         createBtn.disabled = false;
                         this.closeModal();
                     }
-                     else {
+                    else {
                         this.$store.dispatch("getChildrenCapital2", this.$store.getters["getTargetUser"]);
                         this.showAlert("alert-success", "Proceso correcto", "Usuario creado con éxito");
                         createBtn.innerHTML = "Aceptar";
