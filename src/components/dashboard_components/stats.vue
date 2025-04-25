@@ -603,7 +603,7 @@
                                         <button type="button" class="btn btn-cyan px-4 waves-effect waves-light"
                                             @click="create_user" id="ModalNewUserPlayerSubmit"
                                             data-loading="<i class='fa fa-spinner fa-spin '></i> Creando...">Aceptar</button>
-                                            <button data-bs-target="#infofastPlay1" data-bs-toggle="modal"
+                                        <button data-bs-target="#infofastPlay1" data-bs-toggle="modal"
                                             data-bs-dismiss="modal" style="display:none;" id="infofastPlay"></button>
                                     </div>
                                 </div>
@@ -994,14 +994,13 @@
                     </div>
                 </div>
             </div>
-            <div class="modal fade" id="infofastPlay1" aria-hidden="true"
-                aria-labelledby="infofastPlaylabel1" tabindex="-1" data-bs-backdrop="false"
-                style="background-color:rgba(0, 0, 0, 0.5);">
+            <div class="modal fade" id="infofastPlay1" aria-hidden="true" aria-labelledby="infofastPlaylabel1"
+                tabindex="-1" data-bs-backdrop="false" style="background-color:rgba(0, 0, 0, 0.5);">
                 <div class="modal-dialog cascading-modal modal-sm">
                     <div class="modal-content" style="background: #ffffff;">
                         <div class="d-flex justify-content-end align-items-start">
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-                                style="background: none;color:black;" >
+                                style="background: none;color:black;">
                                 <i class="fas fa-times"></i>
                             </button>
                         </div>
@@ -1012,10 +1011,10 @@
                                 <span>Tu contraseña es: {{ this.infoFastPlay.password }}</span><br>
                                 <span>Login Url: {{ this.infoFastPlay.loginUrl }}</span>
                                 <div class="share-link-container">
-                        <button class="btn btn-primary btn-sm" @click="copyToClipboard">
-                            <i class="fas fa-copy"></i> Copiar Enlace
-                        </button>
-                    </div>
+                                    <button class="btn btn-primary btn-sm" @click="copyToClipboard">
+                                        <i class="fas fa-copy"></i> Copiar Enlace
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1153,25 +1152,24 @@ export default {
     },
     methods: {
         copyToClipboard() {
-  const nuevaUrl = this.infoFastPlay.loginUrl;
+            const nuevaUrl = this.infoFastPlay.loginUrl;
 
-  if (!nuevaUrl) {
-    alert("No hay URL para copiar.");
-    return;
-  }
+            if (!nuevaUrl) {
+                alert("No hay URL para copiar.");
+                return;
+            }
 
-  navigator.clipboard.writeText(nuevaUrl)
-    .then(() => {
-      console.log("Enlace copiado:", nuevaUrl);
-      alert("¡Enlace copiado al portapapeles!");
-    })
-    .catch(err => {
-      console.error("Error al copiar:", err);
-      alert("No se pudo copiar el enlace.");
-    });
-},
+            navigator.clipboard.writeText(nuevaUrl)
+                .then(() => {
+                    console.log("Enlace copiado:", nuevaUrl);
+                    alert("¡Enlace copiado al portapapeles!");
+                })
+                .catch(err => {
+                    console.error("Error al copiar:", err);
+                    alert("No se pudo copiar el enlace.");
+                });
+        },
         crearJugador() {
-            console.log("Crear jugador facil",this.userInfo.token,this.target_user_id, this.apiUrlnew);
             const data = {
                 loginId: this.target_user_id,
             };
@@ -1180,18 +1178,18 @@ export default {
                 token: "qCpxTbvkZBePznR",
             };
 
-              axios.post(this.apiUrlnew+'crear_jugador_simple', data, { headers })
+            axios.post(this.apiUrlnew + 'crear_jugador_simple', data, { headers })
                 .then(response => {
-                  console.log('Jugador creado:', response.data);
-                  if(response.data.status == "success") {
-                    this.closeModal();
-                    this.infoFastPlay = response.data;
-                    console.log(this.infoFastPlay);
-                    document.getElementById('infofastPlay').click();
-                  }
+                    console.log('Jugador creado:', response.data);
+                    if (response.data.status == "success") {
+                        this.closeModal();
+                        this.infoFastPlay = response.data;
+                        document.getElementById('infofastPlay').click();
+                    }
                 })
                 .catch(error => {
-                  console.error('Error al crear jugador:', error);
+                    this.new_user_data.error = "Hubo un error al realizar la solicitud.";
+                    console.error('Error al crear jugador:', error);
                 });
         },
         handleFileUpload(event) {
