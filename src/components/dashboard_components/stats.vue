@@ -1050,6 +1050,7 @@
 </template>
 <script>
 /* eslint-disable */
+import Swal from 'sweetalert2';
 import axios from 'axios';
 export default {
     name: 'statsComponent',
@@ -1152,23 +1153,38 @@ export default {
     },
     methods: {
         copyToClipboard() {
-            const nuevaUrl = this.infoFastPlay.loginUrl;
+        const nuevaUrl = this.infoFastPlay.loginUrl;
 
-            if (!nuevaUrl) {
-                alert("No hay URL para copiar.");
-                return;
-            }
+        if (!nuevaUrl) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Atención',
+                text: 'No hay URL para copiar.',
+                confirmButtonText: 'Aceptar'
+            });
+            return;
+        }
 
-            navigator.clipboard.writeText(nuevaUrl)
-                .then(() => {
-                    console.log("Enlace copiado:", nuevaUrl);
-                    alert("¡Enlace copiado al portapapeles!");
-                })
-                .catch(err => {
-                    console.error("Error al copiar:", err);
-                    alert("No se pudo copiar el enlace.");
+        navigator.clipboard.writeText(nuevaUrl)
+            .then(() => {
+                console.log("Enlace copiado:", nuevaUrl);
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Copiado!',
+                    text: 'El enlace se ha copiado al portapapeles.',
+                    confirmButtonText: 'Aceptar'
                 });
-        },
+            })
+            .catch(err => {
+                console.error("Error al copiar:", err);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'No se pudo copiar el enlace.',
+                    confirmButtonText: 'Aceptar'
+                });
+            });
+    },
         crearJugador() {
             const data = {
                 loginId: this.target_user_id,

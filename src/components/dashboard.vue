@@ -423,6 +423,7 @@
 </template>
 <script>
 /* eslint-disable*/
+import Swal from 'sweetalert2';
 import stats from './dashboard_components/stats'
 import users from './dashboard_components/users'
 import reporteAgente from './dashboard_components/reporteAgente'
@@ -491,18 +492,52 @@ export default {
     },
     methods: {
         copyToClipboard() {
-            const input = this.UserData.website;
-            const nuevaUrl = input.replace("apuestaaqui.club", "apuestas365.bet");
 
-            const textarea = document.createElement("textarea");
-            textarea.value = nuevaUrl;
-            document.body.appendChild(textarea);
-            textarea.select();
-            document.execCommand("copy");
-            document.body.removeChild(textarea);
+        const input = this.UserData.website;
+        const nuevaUrl = input.replace("apuestaaqui.club", "apuestas365.bet");
+        if (!nuevaUrl) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Atención',
+                text: 'No hay URL para copiar.',
+                confirmButtonText: 'Aceptar'
+            });
+            return;
+        }
 
-            alert("¡Enlace copiado al portapapeles!");
-        },
+        navigator.clipboard.writeText(nuevaUrl)
+            .then(() => {
+                console.log("Enlace copiado:", nuevaUrl);
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Copiado!',
+                    text: 'El enlace se ha copiado al portapapeles.',
+                    confirmButtonText: 'Aceptar'
+                });
+            })
+            .catch(err => {
+                console.error("Error al copiar:", err);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'No se pudo copiar el enlace.',
+                    confirmButtonText: 'Aceptar'
+                });
+            });
+    },
+        // copyToClipboard() {
+        //     const input = this.UserData.website;
+        //     const nuevaUrl = input.replace("apuestaaqui.club", "apuestas365.bet");
+
+        //     const textarea = document.createElement("textarea");
+        //     textarea.value = nuevaUrl;
+        //     document.body.appendChild(textarea);
+        //     textarea.select();
+        //     document.execCommand("copy");
+        //     document.body.removeChild(textarea);
+
+        //     alert("¡Enlace copiado al portapapeles!");
+        // },
         logout() {
             this.$store.dispatch("logOut")
         },
